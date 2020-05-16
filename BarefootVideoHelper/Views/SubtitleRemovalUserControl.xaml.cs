@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -17,6 +18,33 @@ namespace BarefootVideoHelper
             InitializeComponent();
         }
 
+        private void SourceVideoFileNameTextBox_PreviewDragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effects = DragDropEffects.Copy;
+                e.Handled = true; // Only stop handling after a file drop
+            }
+        }
+
+        private void SourceVideoFileNameTextBox_Drop(object sender, DragEventArgs e)
+        {
+            String[] files = e.Data.GetData(DataFormats.FileDrop) as String[];
+            String[] supportedExtensions = new String[] { ".mp4", ".flv", ".mkv", ".avi" };
+
+            if (files != null && supportedExtensions.Contains(Path.GetExtension(files[0])))
+            {
+                SourceVideoFileNameTextBox.Text = files[0];
+            }
+        }
+
+        private void SourceVideoFileNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            String extension = Path.GetExtension(SourceVideoFileNameTextBox.Text);
+
+            OutputFileNameTextBox.Text = SourceVideoFileNameTextBox.Text.Replace(extension, String.Empty) + "-OUTPUT" + extension;
+        }
+
         private void SourceVideoFileNameBrowseButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog()
@@ -28,10 +56,6 @@ namespace BarefootVideoHelper
             if (dialog.ShowDialog() == true)
             {
                 SourceVideoFileNameTextBox.Text = dialog.FileName;
-
-                String extension = Path.GetExtension(dialog.FileName);
-
-                OutputFileNameTextBox.Text = dialog.FileName.Replace(extension, String.Empty) + "-OUTPUT" + extension;
             }
         }
 
