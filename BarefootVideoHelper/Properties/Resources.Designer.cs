@@ -59,5 +59,26 @@ namespace BarefootVideoHelper.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   maskclip = Levels(clip, 111, 10.000, 255, 99, 211)
+        ///maskclip = GeneralConvolution(maskclip, 0, &quot;
+        ///   10 10 10 10 10
+        ///   10 10 10 10 10 
+        ///   10 10 10 10 10 
+        ///   10 10 10 10 10 
+        ///   10 10 10 10 10 &quot;, 256, false)
+        ///clip2 = OverLay(clip,maskclip,0,0,mode=&quot;subtract&quot;)
+        ///clip2 = Blur(clip2, 1.58)
+        ///clip2 = ConvertToYUY2(clip2)
+        ///clip2= Tweak(clip2, hue=-180.0,bright=22,cont=10.0)
+        ///maskclip = Crop(clip2, SubtitleTopLeftX,SubtitleTopLeftY,-SubtitleTopLeftX,0).ConvertToRGB32.crop(0,0,0,-2).Trim(0,0)
+        ///maskclip = maskclip. [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string HardCodedSubtitleRemovalAlgorithm {
+            get {
+                return ResourceManager.GetString("HardCodedSubtitleRemovalAlgorithm", resourceCulture);
+            }
+        }
     }
 }

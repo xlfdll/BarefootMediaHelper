@@ -58,6 +58,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\SubtitleRemovalUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BBCompositionUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -69,8 +77,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ConversionMode.cs" />
-    <Compile Include="Helper.cs" />
+    <Compile Include="Helpers\MainHelper.cs" />
+    <Compile Include="Helpers\SubtitleRemovalHelper.cs" />
+    <Compile Include="Views\SubtitleRemovalUserControl.xaml.cs">
+      <DependentUpon>SubtitleRemovalUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BBCompositionUserControl.xaml.cs">
+      <DependentUpon>BBCompositionUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\BBCompositionHelper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -104,6 +119,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Barefoot.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\HardCodedSubtitleRemovalAlgorithm.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

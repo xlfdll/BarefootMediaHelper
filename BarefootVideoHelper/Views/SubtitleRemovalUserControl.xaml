@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="BarefootVideoHelper.SubtitleRemovalUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BarefootVideoHelper"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid Grid.IsSharedSizeScope="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" SharedSizeGroup="Labels"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="_Mode"/>
+        <ComboBox x:Name="ModeComboBox" Grid.Row="0" Grid.Column="1" SelectedIndex="0">
+            <ComboBoxItem Content="Soft-coded"/>
+            <ComboBoxItem Content="Hard-coded"/>
+        </ComboBox>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="_Source Video"/>
+        <TextBox x:Name="SourceVideoFileNameTextBox" Grid.Row="1" Grid.Column="1" IsReadOnly="True"/>
+        <Button Grid.Row="1" Grid.Column="2" Content="_Browse..." Click="SourceVideoFileNameBrowseButton_Click"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="_Output"/>
+        <TextBox x:Name="OutputFileNameTextBox" Grid.Row="2" Grid.Column="1" IsReadOnly="True"/>
+        <Button Grid.Row="2" Grid.Column="2" Content="Save _To..." Click="OutputFileNameBrowseButton_Click"/>
+
+        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=SelectedIndex, ElementName=ModeComboBox}" Value="0">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="Labels"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Content="_Subtitle Top Left X"/>
+            <TextBox x:Name="SubtitleTopLeftXFileNameTextBox" Grid.Column="1"/>
+
+            <Label Grid.Column="2" Content="_Subtitle Top Left X"/>
+            <TextBox x:Name="SubtitleTopLeftYFileNameTextBox" Grid.Column="3"/>
+        </Grid>
+
+        <Button Grid.Row="3" Grid.Column="2" Content="_Start" IsDefault="True"
+                Click="StartButton_Click"/>
+    </Grid>
+</UserControl>

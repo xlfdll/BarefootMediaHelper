@@ -10,54 +10,40 @@
         Width="500" SizeToContent="Height"
         Loaded="MainWindow_Loaded">
 
-    <Grid>
-        <Grid.Resources>
-            <Style TargetType="Grid">
-                <Setter Property="Margin" Value="3"/>
-            </Style>
-            <Style TargetType="Label">
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-            </Style>
-            <Style TargetType="TextBox">
-                <Setter Property="VerticalAlignment" Value="Center"/>
-            </Style>
-            <Style TargetType="CheckBox">
-                <Setter Property="VerticalAlignment" Value="Center"/>
-            </Style>
-            <Style TargetType="Button">
-                <Setter Property="Margin" Value="5"/>
-                <Setter Property="Padding" Value="5"/>
-            </Style>
-        </Grid.Resources>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+    <Window.Resources>
+        <Style TargetType="TabControl">
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+        <Style TargetType="Grid">
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+    </Window.Resources>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="_Source Video"/>
-        <TextBox x:Name="SourceVideoFileNameTextBox" Grid.Row="0" Grid.Column="1" IsReadOnly="True"/>
-        <Button Grid.Row="0" Grid.Column="2" Content="_Browse..." Click="SourceVideoFileNameBrowseButton_Click"/>
-
-        <Label Grid.Row="1" Grid.Column="0" Content="_Source Subtitle"/>
-        <TextBox x:Name="SourceSubtitleFileNameTextBox" Grid.Row="1" Grid.Column="1" IsReadOnly="True"/>
-        <Button Grid.Row="1" Grid.Column="2" Content="_Browse..." Click="SourceSubtitleFileNameBrowseButton_Click"/>
-
-        <Label Grid.Row="2" Grid.Column="0" Content="_Output"/>
-        <TextBox x:Name="OutputFileNameTextBox" Grid.Row="2" Grid.Column="1" IsReadOnly="True"/>
-        <Button Grid.Row="2" Grid.Column="2" Content="Save _To..." Click="OutputFileNameBrowseButton_Click"/>
-
-        <Label Grid.Row="3" Grid.Column="0" Content="_Mode"/>
-        <CheckBox x:Name="HD60FPSCheckBox" Grid.Row="3" Grid.Column="1" Content="Source video is _60fps"/>
-
-        <Button Grid.Row="4" Grid.Column="2" Content="_Start Convert" IsDefault="True"
-                Click="ConvertButton_Click"/>
-    </Grid>
+    <TabControl>
+        <TabItem Header="BB Composition">
+            <local:BBCompositionUserControl/>
+        </TabItem>
+        <TabItem Header="Subtitle Removal">
+            <local:SubtitleRemovalUserControl/>
+        </TabItem>
+    </TabControl>
 </Window>
