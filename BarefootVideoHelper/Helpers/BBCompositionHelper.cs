@@ -14,7 +14,7 @@ namespace BarefootVideoHelper
             String outputDirectory = Path.GetDirectoryName(outputFileName);
             String tempFileName = Path.Combine(outputDirectory, Path.GetRandomFileName());
             String outputFileExtension = Path.GetExtension(outputFileName);
-            String commonParameters = $"-vcodec libx264 -preset veryslow -profile:v high -level:v 4.1 -pix_fmt yuv420p -b:v 2000k -acodec aac -strict -2 -ac 2 -ab 192k -ar 44100 -f {outputFileExtension.Remove(0, 1)} - y ";
+            String commonParameters = $"-vcodec libx264 -preset veryslow -profile:v high -level:v 4.1 -pix_fmt yuv420p -b:v 2000k -acodec aac -strict -2 -ac 2 -ab 192k -ar 44100 -f {outputFileExtension.Remove(0, 1)} -y ";
 
             // Pass 1
             StringBuilder sb = new StringBuilder();
@@ -35,7 +35,7 @@ namespace BarefootVideoHelper
             }
 
             sb.Append("-pass 1 ");
-            sb.Append(tempFileName);
+            sb.Append($"\"{tempFileName}\"");
 
             using (Process process = Process.Start(MainHelper.FFMPEGPath, sb.ToString()))
             {
@@ -54,7 +54,7 @@ namespace BarefootVideoHelper
             }
 
             sb.Append("-pass 2 ");
-            sb.Append(outputFileName);
+            sb.Append($"\"{outputFileName}\"");
 
             using (Process process = Process.Start(MainHelper.FFMPEGPath, sb.ToString()))
             {
