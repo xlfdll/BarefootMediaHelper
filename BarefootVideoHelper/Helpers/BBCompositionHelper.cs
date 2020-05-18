@@ -13,7 +13,8 @@ namespace BarefootVideoHelper
         {
             String outputDirectory = Path.GetDirectoryName(outputFileName);
             String tempFileName = Path.Combine(outputDirectory, Path.GetRandomFileName());
-            String commonParameters = "-vcodec libx264 -preset veryslow -profile:v high -level:v 4.1 -pix_fmt yuv420p -b:v 1780k -acodec aac -strict -2 -ac 2 -ab 128k -ar 44100 -f flv -y ";
+            String outputFileExtension = Path.GetExtension(outputFileName);
+            String commonParameters = $"-vcodec libx264 -preset veryslow -profile:v high -level:v 4.1 -pix_fmt yuv420p -b:v 2000k -acodec aac -strict -2 -ac 2 -ab 192k -ar 44100 -f {outputFileExtension.Remove(0, 1)} - y ";
 
             // Pass 1
             StringBuilder sb = new StringBuilder();

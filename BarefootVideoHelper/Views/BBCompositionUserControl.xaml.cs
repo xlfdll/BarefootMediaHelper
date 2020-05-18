@@ -42,7 +42,7 @@ namespace BarefootVideoHelper
         {
             String extension = Path.GetExtension(SourceVideoFileNameTextBox.Text);
 
-            OutputFileNameTextBox.Text = SourceVideoFileNameTextBox.Text.Replace(extension, String.Empty) + "-OUTPUT" + ".flv";
+            OutputFileNameTextBox.Text = SourceVideoFileNameTextBox.Text.Replace(extension, String.Empty) + "-OUTPUT" + ".mp4";
         }
 
         private void SourceVideoFileNameBrowseButton_Click(object sender, RoutedEventArgs e)
@@ -97,7 +97,7 @@ namespace BarefootVideoHelper
         {
             SaveFileDialog dialog = new SaveFileDialog()
             {
-                Filter = "Supported Format (*.flv)|*.flv|All Files (*.*)|*.*",
+                Filter = "MPEG-4 Part 14 (*.mp4)|*.mp4|Flash Video (*.flv)|*.flv|All Files (*.*)|*.*",
                 FileName = OutputFileNameTextBox.Text
             };
 
