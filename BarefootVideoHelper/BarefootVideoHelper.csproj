@@ -141,12 +141,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\subtitles_removal.avsi" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Barefoot.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\HardCodedSubtitleRemovalAlgorithm.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
