@@ -133,7 +133,7 @@ namespace BarefootVideoHelper
             sb.AppendLine($"Import(\"{Path.Combine(toolsPath, @"filters\dekafka.avsi")}\")");
             sb.AppendLine($"Import(\"{Path.Combine(toolsPath, @"filters\subtitles_removal.avsi")}\")");
 
-            sb.AppendLine($"clip = FFVideoSource(\"{sourceVideoFileName}\").ConvertToRGB32()");
+            sb.AppendLine($"clip = FFVideoSource(\"{sourceVideoFileName}\")");
 
             foreach (SubtitleParameters parameters in subtitleParameters)
             {

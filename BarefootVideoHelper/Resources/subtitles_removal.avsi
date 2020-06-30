@@ -2,6 +2,7 @@
 
 function removeSubtitles(clip clip, int topLeftX, int topLeftY)
 {
+clip = clip.ConvertToRGB32()
 maskclip = Levels(clip, 111, 10.000, 255, 99, 211)
 maskclip = GeneralConvolution(maskclip, 0, "
    10 10 10 10 10
