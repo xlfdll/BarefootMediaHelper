@@ -59,15 +59,5 @@ namespace BarefootVideoHelper.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   型 System.Byte[] のローカライズされたリソースを検索します。
-        /// </summary>
-        internal static byte[] subtitles_removal {
-            get {
-                object obj = ResourceManager.GetObject("subtitles_removal", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }
