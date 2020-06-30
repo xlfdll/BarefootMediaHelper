@@ -1,10 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Windows;
-
-using BarefootVideoHelper.Properties;
 
 namespace BarefootVideoHelper
 {
@@ -15,13 +13,15 @@ namespace BarefootVideoHelper
         public static void ExecuteSoftRemoval(String sourceVideoFileName, String outputFileName)
         {
             using (Process process = Process.Start(MainHelper.FFMPEGPath,
-                $"-i \"{sourceVideoFileName}\" -map 0 -map -0:s -codec copy \"{outputFileName}\""))
+                    $"-i \"{sourceVideoFileName}\" -map 0 -map -0:s -codec copy \"{outputFileName}\""))
             {
                 process.WaitForExit();
             }
         }
 
-        public static void ExecuteHardRemoval(String sourceVideoFileName, String outputFileName, Point subtitleTopLeftPosition)
+        public static void ExecuteHardRemoval
+            (String sourceVideoFileName, String outputFileName,
+            IEnumerable<SubtitleParameters> subtitleParameters)
         {
             // AviSynth for x26x - Process source file using hard-coded subtitle removal algorithm
             String avsFileName = Path.Combine(Path.GetTempPath(), "HardCodedSubtitleRemoval.avs");
@@ -30,7 +30,7 @@ namespace BarefootVideoHelper
                 Path.GetFileNameWithoutExtension(outputFileName).Replace("#", String.Empty) + ".264");
 
             File.WriteAllText(avsFileName, SubtitleRemovalHelper.WriteHardCodedSubtitleRemovalAVS
-                (sourceVideoFileName, subtitleTopLeftPosition, MainHelper.ToolsPath));
+                (sourceVideoFileName, MainHelper.ToolsPath, subtitleParameters));
 
             String arguments = $"-o \"{x264OutputFileName}\" \"{avsFileName}\"";
 
@@ -61,7 +61,8 @@ namespace BarefootVideoHelper
             File.Delete(x264OutputFileName);
 
             // FFProbe - Detect audio format of the source
-            arguments = $"-v error -select_streams a:0 -show_entries stream=codec_name -of default=nokey=1:noprint_wrappers=1 \"{sourceVideoFileName}\"";
+            arguments = $"-v error -select_streams a:0 -show_entries stream=codec_name -of default=nokey=1:noprint_wrappers=1" +
+                $" \"{sourceVideoFileName}\"";
 
             ProcessStartInfo audioProbeProcessStartInfo = new ProcessStartInfo
                 (MainHelper.FFProbePath, arguments)
@@ -98,7 +99,8 @@ namespace BarefootVideoHelper
                 }
 
                 // FFMPEG - Remux audio stream with packed video stream
-                arguments = $"-i \"{videoOutputFileName}\" -i \"{audioOutputFileName}\" -map 0:v -map 1:a -c copy -y \"{outputFileName}\"";
+                arguments = $"-i \"{videoOutputFileName}\" -i \"{audioOutputFileName}\" -map 0:v -map 1:a -c copy -y" +
+                    $" \"{outputFileName}\"";
 
                 using (Process process = Process.Start(MainHelper.FFMPEGPath, arguments))
                 {
@@ -114,7 +116,9 @@ namespace BarefootVideoHelper
             }
         }
 
-        private static String WriteHardCodedSubtitleRemovalAVS(String sourceVideoFileName, Point subtitleTopLeftPosition, String toolsPath)
+        private static String WriteHardCodedSubtitleRemovalAVS
+            (String sourceVideoFileName, String toolsPath,
+            IEnumerable<SubtitleParameters> subtitleParameters)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -127,13 +131,29 @@ namespace BarefootVideoHelper
             sb.AppendLine($"LoadVirtualDubPlugin(\"{Path.Combine(toolsPath, @"filters\filter_coring.vdf")}\", \"Core\", 1)");
 
             sb.AppendLine($"Import(\"{Path.Combine(toolsPath, @"filters\dekafka.avsi")}\")");
-
-            sb.AppendLine($"SubtitleTopLeftX = {subtitleTopLeftPosition.X.ToString("F0")}");
-            sb.AppendLine($"SubtitleTopLeftY = {subtitleTopLeftPosition.Y.ToString("F0")}");
+            sb.AppendLine($"Import(\"{Path.Combine(toolsPath, @"filters\subtitles_removal.avsi")}\")");
 
             sb.AppendLine($"clip = FFVideoSource(\"{sourceVideoFileName}\").ConvertToRGB32()");
 
-            sb.AppendLine(Resources.HardCodedSubtitleRemovalAlgorithm);
+            foreach (SubtitleParameters parameters in subtitleParameters)
+            {
+                Int32 topLeftX = parameters.TopLeftX;
+                Int32 topLeftY = parameters.TopLeftY;
+
+                if (parameters.ApplyToAllFrames)
+                {
+                    sb.AppendLine($"clip = removeSubtitles(clip, {topLeftX}, {topLeftY})");
+                }
+                else
+                {
+                    Int32 startFrameIndex = parameters.StartFrameIndex;
+                    Int32 endFrameIndex = parameters.EndFrameIndex;
+
+                    sb.AppendLine($"clip = removeSubtitlesOnDuration(clip, {topLeftX}, {topLeftY}, {startFrameIndex},{endFrameIndex})");
+                }
+            }
+
+            sb.AppendLine("return clip");
 
             return sb.ToString();
         }

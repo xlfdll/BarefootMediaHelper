@@ -7,6 +7,7 @@
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
         Title="Barefoot Video Helper" Icon="pack://application:,,,/Barefoot.ico"
+        metro:TitleCharacterCasing="Normal"
         WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
         Width="720" SizeToContent="Height"
         Loaded="MainWindow_Loaded">
@@ -27,22 +28,33 @@
             <Setter Property="Margin" Value="5"/>
             <Setter Property="FontSize" Value="16"/>
         </Style>
+        <Style TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
         <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
             <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="5"/>
         </Style>
         <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Padding" Value="5"/>
             <Setter Property="FontSize" Value="16"/>
+            <Setter Property="metro:ControlsHelper.ContentCharacterCasing" Value="Normal"/>
+        </Style>
+        <Style TargetType="metro:NumericUpDown" BasedOn="{StaticResource {x:Type metro:NumericUpDown}}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Minimum" Value="0"/>
         </Style>
     </Window.Resources>
 
     <TabControl>
         <TabItem Header="BB Composition">
-            <local:BBCompositionUserControl/>
+            <local:BBCompositionUserControl DataContext="{Binding Path=BBCompositionViewModel}"/>
         </TabItem>
         <TabItem Header="Subtitle Removal">
-            <local:SubtitleRemovalUserControl/>
+            <local:SubtitleRemovalUserControl DataContext="{Binding Path=SubtitleRemovalViewModel}"/>
         </TabItem>
     </TabControl>
 </metro:MetroWindow>

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BarefootVideoHelper"
+             xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -13,54 +14,116 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" SharedSizeGroup="Labels"/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" SharedSizeGroup="Buttons"/>
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="_Mode"/>
-        <ComboBox x:Name="ModeComboBox" Grid.Row="0" Grid.Column="1" SelectedIndex="0">
+        <ComboBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                  SelectedIndex="{Binding Path=SelectedModeIndex}">
             <ComboBoxItem Content="Soft-coded"/>
             <ComboBoxItem Content="Hard-coded"/>
         </ComboBox>
 
         <Label Grid.Row="1" Grid.Column="0" Content="_Source Video"/>
-        <TextBox x:Name="SourceVideoFileNameTextBox" Grid.Row="1" Grid.Column="1" IsReadOnly="True"
-                 AllowDrop="True" PreviewDragOver="SourceVideoFileNameTextBox_PreviewDragOver" Drop="SourceVideoFileNameTextBox_Drop"
-                 TextChanged="SourceVideoFileNameTextBox_TextChanged"/>
-        <Button Grid.Row="1" Grid.Column="2" Content="_Browse..." Click="SourceVideoFileNameBrowseButton_Click"/>
+        <TextBox Grid.Row="1" Grid.Column="1" IsReadOnly="True"
+                 Text="{Binding Path=SourceVideoFileName, Mode=OneWay}"
+                 AllowDrop="True" PreviewDragOver="SourceVideoFileNameTextBox_PreviewDragOver" Drop="SourceVideoFileNameTextBox_Drop"/>
+        <Button Grid.Row="1" Grid.Column="2" Content="_Browse..."
+                Command="{Binding Path=BrowseSourceVideoFileCommand}"/>
 
         <Label Grid.Row="2" Grid.Column="0" Content="_Output"/>
-        <TextBox x:Name="OutputFileNameTextBox" Grid.Row="2" Grid.Column="1" IsReadOnly="True"/>
-        <Button Grid.Row="2" Grid.Column="2" Content="Save _To..." Click="OutputFileNameBrowseButton_Click"/>
+        <TextBox Grid.Row="2" Grid.Column="1" IsReadOnly="True"
+                 Text="{Binding Path=OutputFileName, Mode=OneWay}"/>
+        <Button Grid.Row="2" Grid.Column="2" Content="Save _To..."
+                Command="{Binding Path=BrowseOutputFileCommand}"/>
 
-        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
             <Grid.Style>
                 <Style TargetType="Grid">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=SelectedIndex, ElementName=ModeComboBox}" Value="0">
-                            <Setter Property="IsEnabled" Value="False"/>
+                        <DataTrigger Binding="{Binding Path=SelectedModeIndex}" Value="0">
+                            <Setter Property="Visibility" Value="Collapsed"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Grid.Style>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" SharedSizeGroup="Labels"/>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="Buttons"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Column="0" Content="_Subtitle Top Left X"/>
-            <TextBox x:Name="SubtitleTopLeftXFileNameTextBox" Grid.Column="1"/>
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Labels"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="SubLabels"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-            <Label Grid.Column="2" Content="_Subtitle Top Left Y"/>
-            <TextBox x:Name="SubtitleTopLeftYFileNameTextBox" Grid.Column="3"/>
+                <Label Grid.Column="0" Content="_Subtitle Top Left X"/>
+                <metro:NumericUpDown Grid.Column="1" Value="{Binding Path=NewSubtitleTopLeftX}"/>
+
+                <Label Grid.Column="2" Content="_Subtitle Top Left Y"/>
+                <metro:NumericUpDown Grid.Column="3" Value="{Binding Path=NewSubtitleTopLeftY}"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=ApplyToAllFrames}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Labels"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="SubLabels"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Content="_Subtitle Start Frame #"/>
+                <metro:NumericUpDown Grid.Column="1" Value="{Binding Path=NewSubtitleStartFrameNumber}"/>
+
+                <Label Grid.Column="2" Content="_Subtitle End Frame #"/>
+                <metro:NumericUpDown Grid.Column="3" Value="{Binding Path=NewSubtitleEndFrameNumber}"/>
+            </Grid>
+
+            <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                      Content="Apply to all video frames"
+                      IsChecked="{Binding Path=ApplyToAllFrames}"
+                      HorizontalAlignment="Right"/>
+
+            <Button Grid.Row="0" Grid.RowSpan="3" Grid.Column="3"
+                    Content="Add to&#x0d;&#x0a;Parameter&#x0d;&#x0a;List"
+                    Command="{Binding Path=AddToParameterListCommand}"
+                    VerticalAlignment="Center"/>
+
+            <Label Grid.Row="3" Grid.Column="0" Content="Subtitle Parameters"/>
+            <ListBox Grid.Row="3" Grid.Column="1" MinHeight="100"
+                     ItemsSource="{Binding Path=SubtitleParameters}"
+                     SelectedIndex="{Binding Path=SelectedSubtitleParameterIndex}"/>
+            <Button Grid.Row="3" Grid.Column="2"
+                    Content="Remove&#x0d;&#x0a;Selected"
+                    Command="{Binding Path=RemoveSelectedCommand}"
+                    VerticalAlignment="Center"/>
         </Grid>
 
-        <Button Grid.Row="3" Grid.Column="2" Content="_Start" IsDefault="True"
-                Click="StartButton_Click"/>
+        <Button Grid.Row="4" Grid.Column="2" Content="_Start" IsDefault="True"
+                Command="{Binding Path=StartCommand}"/>
     </Grid>
 </UserControl>

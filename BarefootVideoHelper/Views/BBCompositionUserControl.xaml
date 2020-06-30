@@ -21,24 +21,30 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="_Source Video"/>
-        <TextBox x:Name="SourceVideoFileNameTextBox" Grid.Row="0" Grid.Column="1" IsReadOnly="True"
-                 AllowDrop="True" PreviewDragOver="SourceVideoFileNameTextBox_PreviewDragOver" Drop="SourceVideoFileNameTextBox_Drop"
-                 TextChanged="SourceVideoFileNameTextBox_TextChanged"/>
-        <Button Grid.Row="0" Grid.Column="2" Content="_Browse..." Click="SourceVideoFileNameBrowseButton_Click"/>
+        <TextBox Grid.Row="0" Grid.Column="1" IsReadOnly="True"
+                 Text="{Binding Path=SourceVideoFileName, Mode=OneWay}"
+                 AllowDrop="True" PreviewDragOver="SourceVideoFileNameTextBox_PreviewDragOver" Drop="SourceVideoFileNameTextBox_Drop"/>
+        <Button Grid.Row="0" Grid.Column="2" Content="_Browse..."
+                Command="{Binding Path=BrowseSourceVideoFileCommand}"/>
 
         <Label Grid.Row="1" Grid.Column="0" Content="_Source Subtitle"/>
-        <TextBox x:Name="SourceSubtitleFileNameTextBox" Grid.Row="1" Grid.Column="1" IsReadOnly="True"
+        <TextBox Grid.Row="1" Grid.Column="1" IsReadOnly="True"
+                 Text="{Binding Path=SourceSubtitleFileName, Mode=OneWay}"
                  AllowDrop="True" PreviewDragOver="SourceSubtitleFileNameTextBox_PreviewDragOver" Drop="SourceSubtitleFileNameTextBox_Drop"/>
-        <Button Grid.Row="1" Grid.Column="2" Content="_Browse..." Click="SourceSubtitleFileNameBrowseButton_Click"/>
+        <Button Grid.Row="1" Grid.Column="2" Content="_Browse..."
+                Command="{Binding Path=BrowseSourceSubtitleFileCommand}"/>
 
         <Label Grid.Row="2" Grid.Column="0" Content="_Output"/>
-        <TextBox x:Name="OutputFileNameTextBox" Grid.Row="2" Grid.Column="1" IsReadOnly="True"/>
-        <Button Grid.Row="2" Grid.Column="2" Content="Save _To..." Click="OutputFileNameBrowseButton_Click"/>
+        <TextBox Grid.Row="2" Grid.Column="1" IsReadOnly="True"
+                 Text="{Binding Path=OutputFileName, Mode=OneWay}"/>
+        <Button Grid.Row="2" Grid.Column="2" Content="Save _To..."
+                Command="{Binding Path=BrowseOutputFileCommand}"/>
 
         <Label Grid.Row="3" Grid.Column="0" Content="_Mode"/>
-        <CheckBox x:Name="HD60FPSCheckBox" Grid.Row="3" Grid.Column="1" Content="Source video is _60fps"/>
+        <CheckBox Grid.Row="3" Grid.Column="1" Content="Source video is _60fps"
+                  IsChecked="{Binding Path=IsHD60FPS}"/>
 
         <Button Grid.Row="3" Grid.Column="2" Content="_Start Convert" IsDefault="True"
-                Click="StartButton_Click"/>
+                Command="{Binding Path=StartCommand}"/>
     </Grid>
 </UserControl>

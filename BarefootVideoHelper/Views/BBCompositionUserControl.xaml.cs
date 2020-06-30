@@ -4,8 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-using Microsoft.Win32;
-
 namespace BarefootVideoHelper
 {
     /// <summary>
@@ -34,28 +32,12 @@ namespace BarefootVideoHelper
 
             if (files != null && supportedExtensions.Contains(Path.GetExtension(files[0])))
             {
-                SourceVideoFileNameTextBox.Text = files[0];
-            }
-        }
+                BBCompositionViewModel viewModel = this.DataContext as BBCompositionViewModel;
 
-        private void SourceVideoFileNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            String extension = Path.GetExtension(SourceVideoFileNameTextBox.Text);
-
-            OutputFileNameTextBox.Text = SourceVideoFileNameTextBox.Text.Replace(extension, String.Empty) + "-OUTPUT" + ".mp4";
-        }
-
-        private void SourceVideoFileNameBrowseButton_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog()
-            {
-                Filter = "Supported Formats (*.mp4;*.flv;*.mkv;*.avi)|*.mp4;*.flv;*.mkv;*.avi|All Files (*.*)|*.*",
-                FileName = SourceVideoFileNameTextBox.Text
-            };
-
-            if (dialog.ShowDialog() == true)
-            {
-                SourceVideoFileNameTextBox.Text = dialog.FileName;
+                if (viewModel != null)
+                {
+                    viewModel.SourceVideoFileName = files[0];
+                }
             }
         }
 
@@ -75,60 +57,11 @@ namespace BarefootVideoHelper
 
             if (files != null && supportedExtensions.Contains(Path.GetExtension(files[0])))
             {
-                SourceSubtitleFileNameTextBox.Text = files[0];
-            }
-        }
+                BBCompositionViewModel viewModel = this.DataContext as BBCompositionViewModel;
 
-        private void SourceSubtitleFileNameBrowseButton_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog()
-            {
-                Filter = "Supported Formats (*.ass;*.srt)|*.ass;*.srt|All Files (*.*)|*.*",
-                FileName = SourceSubtitleFileNameTextBox.Text
-            };
-
-            if (dialog.ShowDialog() == true)
-            {
-                SourceSubtitleFileNameTextBox.Text = dialog.FileName;
-            }
-        }
-
-        private void OutputFileNameBrowseButton_Click(object sender, RoutedEventArgs e)
-        {
-            SaveFileDialog dialog = new SaveFileDialog()
-            {
-                Filter = "MPEG-4 Part 14 (*.mp4)|*.mp4|Flash Video (*.flv)|*.flv|All Files (*.*)|*.*",
-                FileName = OutputFileNameTextBox.Text
-            };
-
-            if (dialog.ShowDialog() == true)
-            {
-                OutputFileNameTextBox.Text = dialog.FileName;
-            }
-        }
-
-        private void StartButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (String.IsNullOrEmpty(SourceVideoFileNameTextBox.Text))
-            {
-                MessageBox.Show(App.Current.MainWindow, "Please select a video file as source.", App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            else if (String.IsNullOrEmpty(OutputFileNameTextBox.Text))
-            {
-                MessageBox.Show(App.Current.MainWindow, "Please select a file as output.", App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            else
-            {
-                try
+                if (viewModel != null)
                 {
-                    BBCompositionHelper.ExecuteConversion(SourceVideoFileNameTextBox.Text, SourceSubtitleFileNameTextBox.Text, OutputFileNameTextBox.Text,
-                                HD60FPSCheckBox.IsChecked == true);
-
-                    MessageBox.Show(App.Current.MainWindow, "Operation completed.", App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(App.Current.MainWindow, ex.Message, App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Error);
+                    viewModel.SourceSubtitleFileName = files[0];
                 }
             }
         }
