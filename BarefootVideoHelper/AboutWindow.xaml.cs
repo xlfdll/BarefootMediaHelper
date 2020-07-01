@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -39,5 +40,10 @@ namespace Xlfdll.Windows.Presentation.Dialogs
 
         public AboutWindow(Window ownerWindow, AssemblyMetadata assemblyMetadata, ApplicationPackUri aboutImagePackUri)
             : this(ownerWindow, assemblyMetadata, new BitmapImage(aboutImagePackUri)) { }
+
+        private void BarefootHyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://space.bilibili.com/259213");
+        }
     }
 }

@@ -13,7 +13,7 @@
             </Style>
             <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                 <Setter Property="HorizontalAlignment" Value="Center"/>
-                
+
                 <Setter Property="Width" Value="100"/>
             </Style>
         </Grid.Resources>
@@ -35,7 +35,9 @@
         <TextBlock Grid.Row="4" Text="{Binding Path=AssemblyVersion}"/>
         <TextBlock Grid.Row="5" Text="{Binding Path=AssemblyCopyright}"/>
 
-        <TextBlock Grid.Row="6" Text="Made for Barefoot Invader (素足星侵略者)"/>
+        <TextBlock Grid.Row="6">
+            Made for <Hyperlink Click="BarefootHyperlink_Click">Barefoot Invader (素足星侵略者)</Hyperlink>
+        </TextBlock>
 
         <Button Grid.Row="7" Content="OK" IsDefault="True" IsCancel="True"/>
     </Grid>
