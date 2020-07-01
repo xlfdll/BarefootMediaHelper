@@ -56,6 +56,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -78,8 +79,23 @@
                 <Label Grid.Column="2" Content="_Subtitle Top Left Y"/>
                 <metro:NumericUpDown Grid.Column="3" Value="{Binding Path=NewSubtitleTopLeftY}"/>
             </Grid>
-
+            
             <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Labels"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="SubLabels"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" Content="_Subtitle Bottom Right X"/>
+                <metro:NumericUpDown Grid.Column="1" Value="{Binding Path=NewSubtitleBottomRightX}"/>
+
+                <Label Grid.Column="2" Content="_Subtitle Bottom Right Y"/>
+                <metro:NumericUpDown Grid.Column="3" Value="{Binding Path=NewSubtitleBottomRightY}"/>
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
                 <Grid.Style>
                     <Style TargetType="Grid">
                         <Style.Triggers>
@@ -103,21 +119,21 @@
                 <metro:NumericUpDown Grid.Column="3" Value="{Binding Path=NewSubtitleEndFrameNumber}"/>
             </Grid>
 
-            <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+            <CheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                       Content="Apply to all video frames"
                       IsChecked="{Binding Path=ApplyToAllFrames}"
                       HorizontalAlignment="Right"/>
 
-            <Button Grid.Row="0" Grid.RowSpan="3" Grid.Column="3"
+            <Button Grid.Row="0" Grid.RowSpan="4" Grid.Column="3"
                     Content="Add to&#x0d;&#x0a;Parameter&#x0d;&#x0a;List"
                     Command="{Binding Path=AddToParameterListCommand}"
                     VerticalAlignment="Center"/>
 
-            <Label Grid.Row="3" Grid.Column="0" Content="Subtitle Parameters"/>
-            <ListBox Grid.Row="3" Grid.Column="1" MinHeight="100"
+            <Label Grid.Row="4" Grid.Column="0" Content="Subtitle Parameters"/>
+            <ListBox Grid.Row="4" Grid.Column="1" MinHeight="100"
                      ItemsSource="{Binding Path=SubtitleParameters}"
                      SelectedIndex="{Binding Path=SelectedSubtitleParameterIndex}"/>
-            <Button Grid.Row="3" Grid.Column="2"
+            <Button Grid.Row="4" Grid.Column="2"
                     Content="Remove&#x0d;&#x0a;Selected"
                     Command="{Binding Path=RemoveSelectedCommand}"
                     VerticalAlignment="Center"/>

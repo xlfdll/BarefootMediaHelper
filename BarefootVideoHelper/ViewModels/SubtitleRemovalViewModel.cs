@@ -26,6 +26,8 @@ namespace BarefootVideoHelper
 
         private Int32 _newSubtitleTopLeftX;
         private Int32 _newSubtitleTopLeftY;
+        private Int32 _newSubtitleBottomRightX;
+        private Int32 _newSubtitleBottomRightY;
         private Int32 _newSubtitleStartFrameNumber;
         private Int32 _newSubtitleEndFrameNumber;
         private Boolean _applyToAllFrames;
@@ -69,6 +71,18 @@ namespace BarefootVideoHelper
         {
             get => _newSubtitleTopLeftY;
             set => SetField(ref _newSubtitleTopLeftY, value);
+        }
+
+        public Int32 NewSubtitleBottomRightX
+        {
+            get => _newSubtitleBottomRightX;
+            set => SetField(ref _newSubtitleBottomRightX, value);
+        }
+
+        public Int32 NewSubtitleBottomRightY
+        {
+            get => _newSubtitleBottomRightY;
+            set => SetField(ref _newSubtitleBottomRightY, value);
         }
 
         public Int32 NewSubtitleStartFrameNumber
@@ -142,10 +156,14 @@ namespace BarefootVideoHelper
                         = this.ApplyToAllFrames
                         ? new SubtitleParameters
                             (this.NewSubtitleTopLeftX,
-                            this.NewSubtitleTopLeftY)
+                            this.NewSubtitleTopLeftY,
+                            this.NewSubtitleBottomRightX,
+                            this.NewSubtitleBottomRightY)
                         : new SubtitleParameters
                             (this.NewSubtitleTopLeftX,
                             this.NewSubtitleTopLeftY,
+                            this.NewSubtitleBottomRightX,
+                            this.NewSubtitleBottomRightY,
                             this.NewSubtitleStartFrameNumber,
                             this.NewSubtitleEndFrameNumber);
 
@@ -225,6 +243,8 @@ namespace BarefootVideoHelper
         {
             this.NewSubtitleTopLeftX = 0;
             this.NewSubtitleTopLeftY = 0;
+            this.NewSubtitleBottomRightX = 0;
+            this.NewSubtitleBottomRightY = 0;
             this.NewSubtitleStartFrameNumber = 0;
             this.NewSubtitleEndFrameNumber = 0;
         }

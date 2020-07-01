@@ -139,17 +139,19 @@ namespace BarefootVideoHelper
             {
                 Int32 topLeftX = parameters.TopLeftX;
                 Int32 topLeftY = parameters.TopLeftY;
+                Int32 bottomRightX = parameters.BottomRightX;
+                Int32 bottomRightY = parameters.BottomRightY;
 
                 if (parameters.ApplyToAllFrames)
                 {
-                    sb.AppendLine($"clip = removeSubtitles(clip, {topLeftX}, {topLeftY})");
+                    sb.AppendLine($"clip = removeSubtitles(clip, {topLeftX}, {topLeftY}, {bottomRightX}, {bottomRightY})");
                 }
                 else
                 {
                     Int32 startFrameIndex = parameters.StartFrameIndex;
                     Int32 endFrameIndex = parameters.EndFrameIndex;
 
-                    sb.AppendLine($"clip = removeSubtitlesOnDuration(clip, {topLeftX}, {topLeftY}, {startFrameIndex},{endFrameIndex})");
+                    sb.AppendLine($"clip = removeSubtitlesOnDuration(clip, {topLeftX}, {topLeftY}, {bottomRightX}, {bottomRightY}, {startFrameIndex},{endFrameIndex})");
                 }
             }
 
