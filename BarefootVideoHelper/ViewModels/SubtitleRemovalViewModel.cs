@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
+using System.Windows.Input;
 
 using Microsoft.Win32;
 
@@ -52,6 +53,8 @@ namespace BarefootVideoHelper
                 String extension = Path.GetExtension(_sourceVideoFileName);
 
                 this.OutputFileName = _sourceVideoFileName.Replace(extension, String.Empty) + "-OUTPUT" + ".mp4";
+
+                CommandManager.InvalidateRequerySuggested();
             }
         }
 
@@ -196,46 +199,48 @@ namespace BarefootVideoHelper
             (
                 delegate
                 {
-                    if (String.IsNullOrEmpty(this.SourceVideoFileName))
+                    try
                     {
-                        MessageBox.Show(App.Current.MainWindow, "Please select a video file as source.", App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                    else if (String.IsNullOrEmpty(this.OutputFileName))
-                    {
-                        MessageBox.Show(App.Current.MainWindow, "Please select a file as output.", App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                    else
-                    {
-                        try
-                        {
-                            SubtitleRemovalMode mode = (SubtitleRemovalMode)this.SelectedModeIndex;
+                        SubtitleRemovalMode mode = (SubtitleRemovalMode)this.SelectedModeIndex;
 
-                            switch (mode)
-                            {
-                                case SubtitleRemovalMode.Soft:
-                                    SubtitleRemovalHelper.ExecuteSoftRemoval
+                        switch (mode)
+                        {
+                            case SubtitleRemovalMode.Soft:
+                                SubtitleRemovalHelper.ExecuteSoftRemoval
+                                    (this.SourceVideoFileName,
+                                    this.OutputFileName);
+
+                                break;
+                            case SubtitleRemovalMode.Hard:
+                                SubtitleRemovalHelper.ExecuteHardRemoval
                                         (this.SourceVideoFileName,
-                                        this.OutputFileName);
+                                        this.OutputFileName,
+                                        this.SubtitleParameters);
 
-                                    break;
-                                case SubtitleRemovalMode.Hard:
-                                    SubtitleRemovalHelper.ExecuteHardRemoval
-                                            (this.SourceVideoFileName,
-                                            this.OutputFileName,
-                                            this.SubtitleParameters);
-
-                                    break;
-                                default:
-                                    throw new ArgumentException("Unsupported mode");
-                            }
-
-                            MessageBox.Show(App.Current.MainWindow, "Operation completed.", App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Information);
+                                break;
+                            default:
+                                throw new ArgumentException("Unsupported mode");
                         }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(App.Current.MainWindow, ex.Message, App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
+
+                        MessageBox.Show(App.Current.MainWindow, "Operation completed.", App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Information);
                     }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(App.Current.MainWindow, ex.Message, App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                },
+                delegate
+                {
+                    Boolean isEnabled = !String.IsNullOrEmpty(this.SourceVideoFileName) && !String.IsNullOrEmpty(this.OutputFileName);
+
+                    SubtitleRemovalMode mode = (SubtitleRemovalMode)this.SelectedModeIndex;
+
+                    if (mode == SubtitleRemovalMode.Hard)
+                    {
+                        isEnabled &= this.SubtitleParameters.Count > 0;
+                    }
+
+                    return isEnabled;
                 }
             );
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
+using System.Windows.Input;
 
 using Microsoft.Win32;
 
@@ -28,6 +29,8 @@ namespace BarefootVideoHelper
                 String extension = Path.GetExtension(_sourceVideoFileName);
 
                 this.OutputFileName = _sourceVideoFileName.Replace(extension, String.Empty) + "-OUTPUT" + ".mp4";
+
+                CommandManager.InvalidateRequerySuggested();
             }
         }
 
@@ -108,31 +111,24 @@ namespace BarefootVideoHelper
             (
                 delegate
                 {
-                    if (String.IsNullOrEmpty(this.SourceVideoFileName))
+                    try
                     {
-                        MessageBox.Show(App.Current.MainWindow, "Please select a video file as source.", App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                    else if (String.IsNullOrEmpty(this.OutputFileName))
-                    {
-                        MessageBox.Show(App.Current.MainWindow, "Please select a file as output.", App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                    else
-                    {
-                        try
-                        {
-                            BBCompositionHelper.ExecuteConversion
-                                (this.SourceVideoFileName,
-                                this.SourceSubtitleFileName,
-                                this.OutputFileName,
-                                this.IsHD60FPS);
+                        BBCompositionHelper.ExecuteConversion
+                            (this.SourceVideoFileName,
+                            this.SourceSubtitleFileName,
+                            this.OutputFileName,
+                            this.IsHD60FPS);
 
-                            MessageBox.Show(App.Current.MainWindow, "Operation completed.", App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Information);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(App.Current.MainWindow, ex.Message, App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
+                        MessageBox.Show(App.Current.MainWindow, "Operation completed.", App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Information);
                     }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(App.Current.MainWindow, ex.Message, App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                },
+                delegate
+                {
+                    return !String.IsNullOrEmpty(this.SourceVideoFileName) && !String.IsNullOrEmpty(this.OutputFileName);
                 }
             );
     }
