@@ -12,6 +12,12 @@
         Width="720" SizeToContent="Height"
         Loaded="MainWindow_Loaded">
 
+    <metro:MetroWindow.RightWindowCommands>
+        <metro:WindowCommands>
+            <Button Content="About" Command="{Binding Path=AboutCommand}"/>
+        </metro:WindowCommands>
+    </metro:MetroWindow.RightWindowCommands>
+
     <Window.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
             <Setter Property="VerticalAlignment" Value="Center"/>
