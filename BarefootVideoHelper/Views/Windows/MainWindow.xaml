@@ -8,7 +8,7 @@
         xmlns:metroDialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="Barefoot Video Helper" Icon="pack://application:,,,/Barefoot.ico"
-        metro:TitleCharacterCasing="Normal"
+        metro:TitleCharacterCasing="Normal" GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
         WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
         Width="720" SizeToContent="Height"
         Loaded="MainWindow_Loaded">

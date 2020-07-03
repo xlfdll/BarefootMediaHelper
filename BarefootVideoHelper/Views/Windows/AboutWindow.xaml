@@ -4,7 +4,7 @@
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
         Title="About" ShowInTaskbar="False" ResizeMode="NoResize"
         Width="300" SizeToContent="Height" WindowStartupLocation="CenterOwner"
-        TitleCharacterCasing="Normal">
+        TitleCharacterCasing="Normal" GlowBrush="{DynamicResource MahApps.Brushes.Accent}">
 
     <Grid>
         <Grid.Resources>
