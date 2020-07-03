@@ -1,0 +1,44 @@
+﻿<metro:MetroWindow x:Class="BarefootVideoHelper.LogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BarefootVideoHelper"
+        xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        Title="Log" Icon="pack://application:,,,/Barefoot.ico"
+        WindowStartupLocation="Manual" ResizeMode="CanResizeWithGrip" WindowStyle="ToolWindow"
+        metro:TitleCharacterCasing="Normal" ShowCloseButton="False"
+        Top="0" Left="0" Width="600" Height="480">
+
+    <Window.Resources>
+        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="metro:ControlsHelper.ContentCharacterCasing" Value="Normal"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBox Grid.Row="0" Text="{Binding Path=Log, Mode=OneWay}" IsReadOnly="True"
+                 HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                 TextChanged="LogTextBox_TextChanged"/>
+
+        <CheckBox Grid.Row="1" Content="_AutoScroll" HorizontalAlignment="Left"
+                  IsChecked="{Binding Path=AutoScroll}"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Clea_r" Command="{Binding Path=ClearCommand}"/>
+        </StackPanel>
+    </Grid>
+</metro:MetroWindow>

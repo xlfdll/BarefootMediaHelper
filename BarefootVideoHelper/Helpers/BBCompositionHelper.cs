@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
+
+using Xlfdll.Diagnostics;
 
 namespace BarefootVideoHelper
 {
@@ -9,7 +11,7 @@ namespace BarefootVideoHelper
 
     public static class BBCompositionHelper
     {
-        public static void ExecuteConversion(String sourceVideoFileName, String sourceSubtitleFileName, String outputFileName, Boolean is60FPS)
+        public static async Task ExecuteConversion(String sourceVideoFileName, String sourceSubtitleFileName, String outputFileName, Boolean is60FPS)
         {
             String outputDirectory = Path.GetDirectoryName(outputFileName);
             String tempFileName = Path.Combine(outputDirectory, Path.GetRandomFileName());
@@ -37,9 +39,11 @@ namespace BarefootVideoHelper
             sb.Append("-pass 1 ");
             sb.Append($"\"{tempFileName}\"");
 
-            using (Process process = Process.Start(MainHelper.FFMPEGPath, sb.ToString()))
+            using (RedirectedProcess process = new RedirectedProcess(ToolPaths.FFMPEGPath, sb.ToString()))
             {
-                process.WaitForExit();
+                App.LogViewModel.RedirectedProcess = process;
+
+                await process.StartAsync();
             }
 
             // Pass 2
@@ -56,9 +60,11 @@ namespace BarefootVideoHelper
             sb.Append("-pass 2 ");
             sb.Append($"\"{outputFileName}\"");
 
-            using (Process process = Process.Start(MainHelper.FFMPEGPath, sb.ToString()))
+            using (RedirectedProcess process = new RedirectedProcess(ToolPaths.FFMPEGPath, sb.ToString()))
             {
-                process.WaitForExit();
+                App.LogViewModel.RedirectedProcess = process;
+
+                await process.StartAsync();
             }
 
             File.Delete(tempFileName);

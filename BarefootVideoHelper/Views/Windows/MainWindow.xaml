@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BarefootVideoHelper"
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:metroDialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         mc:Ignorable="d"
         Title="Barefoot Video Helper" Icon="pack://application:,,,/Barefoot.ico"
         metro:TitleCharacterCasing="Normal"
@@ -55,7 +56,7 @@
         </Style>
     </Window.Resources>
 
-    <TabControl>
+    <TabControl metroDialogs:DialogParticipation.Register="{Binding}">
         <TabItem Header="BB Composition">
             <local:BBCompositionUserControl DataContext="{Binding Path=BBCompositionViewModel}"/>
         </TabItem>

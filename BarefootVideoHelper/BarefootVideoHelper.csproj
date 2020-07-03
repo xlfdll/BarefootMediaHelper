@@ -72,19 +72,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AboutWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\SubtitleRemovalUserControl.xaml">
+    <Page Include="Views\Windows\LogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\BBCompositionUserControl.xaml">
+    <Page Include="Views\Windows\AboutWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\SubtitleRemovalUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\UserControls\BBCompositionUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -94,37 +98,44 @@
     <Compile Include="..\XDLibrary\Xlfdll.Core\Diagnostics\AssemblyMetadata.cs">
       <Link>Base\AssemblyMetadata.cs</Link>
     </Compile>
+    <Compile Include="..\XDLibrary\Xlfdll.Core\Diagnostics\RedirectedProcess.cs">
+      <Link>Base\RedirectedProcess.cs</Link>
+    </Compile>
     <Compile Include="..\XDLibrary\Xlfdll.Core\Infrastructure\ObservableObject.cs">
       <Link>Base\ObservableObject.cs</Link>
     </Compile>
     <Compile Include="..\XDLibrary\Xlfdll.Windows.Presentation\ApplicationPackUri.cs">
-      <Link>Base\ApplicationPackUri.cs</Link>
+      <Link>Base\Windows\Presentation\ApplicationPackUri.cs</Link>
     </Compile>
     <Compile Include="..\XDLibrary\Xlfdll.Windows.Presentation\RelayCommand.cs">
-      <Link>Base\RelayCommand.cs</Link>
+      <Link>Base\Windows\Presentation\RelayCommand.cs</Link>
     </Compile>
-    <Compile Include="AboutWindow.xaml.cs">
+    <Compile Include="Views\Windows\LogWindow.xaml.cs">
+      <DependentUpon>LogWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\LogViewModel.cs" />
+    <Compile Include="Views\Windows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Helpers\MainHelper.cs" />
+    <Compile Include="ToolPaths.cs" />
     <Compile Include="Helpers\SubtitleRemovalHelper.cs" />
     <Compile Include="Models\SubtitleParameters.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BBCompositionViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SubtitleRemovalViewModel.cs" />
-    <Compile Include="Views\SubtitleRemovalUserControl.xaml.cs">
+    <Compile Include="Views\UserControls\SubtitleRemovalUserControl.xaml.cs">
       <DependentUpon>SubtitleRemovalUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\BBCompositionUserControl.xaml.cs">
+    <Compile Include="Views\UserControls\BBCompositionUserControl.xaml.cs">
       <DependentUpon>BBCompositionUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BBCompositionHelper.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

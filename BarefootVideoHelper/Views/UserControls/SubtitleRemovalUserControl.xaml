@@ -29,7 +29,7 @@
             <ComboBoxItem Content="Hard-coded"/>
         </ComboBox>
 
-        <Label Grid.Row="1" Grid.Column="0" Content="_Source Video"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Source _Video"/>
         <TextBox Grid.Row="1" Grid.Column="1" IsReadOnly="True"
                  Text="{Binding Path=SourceVideoFileName, Mode=OneWay}"
                  AllowDrop="True" PreviewDragOver="SourceVideoFileNameTextBox_PreviewDragOver" Drop="SourceVideoFileNameTextBox_Drop"/>
@@ -73,10 +73,10 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0" Content="_Subtitle Top Left X"/>
+                <Label Grid.Column="0" Content="Subtitle Top _Left X"/>
                 <metro:NumericUpDown Grid.Column="1" Value="{Binding Path=NewSubtitleTopLeftX}"/>
 
-                <Label Grid.Column="2" Content="_Subtitle Top Left Y"/>
+                <Label Grid.Column="2" Content="Subtitle Top _Left Y"/>
                 <metro:NumericUpDown Grid.Column="3" Value="{Binding Path=NewSubtitleTopLeftY}"/>
             </Grid>
             
@@ -88,10 +88,10 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0" Content="_Subtitle Bottom Right X"/>
+                <Label Grid.Column="0" Content="Subtitle Bottom _Right X"/>
                 <metro:NumericUpDown Grid.Column="1" Value="{Binding Path=NewSubtitleBottomRightX}"/>
 
-                <Label Grid.Column="2" Content="_Subtitle Bottom Right Y"/>
+                <Label Grid.Column="2" Content="Subtitle Bottom _Right Y"/>
                 <metro:NumericUpDown Grid.Column="3" Value="{Binding Path=NewSubtitleBottomRightY}"/>
             </Grid>
 
@@ -112,10 +112,10 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0" Content="_Subtitle Start Frame #"/>
+                <Label Grid.Column="0" Content="Subtitle Start _Frame #"/>
                 <metro:NumericUpDown Grid.Column="1" Value="{Binding Path=NewSubtitleStartFrameNumber}"/>
 
-                <Label Grid.Column="2" Content="_Subtitle End Frame #"/>
+                <Label Grid.Column="2" Content="Subtitle End _Frame #"/>
                 <metro:NumericUpDown Grid.Column="3" Value="{Binding Path=NewSubtitleEndFrameNumber}"/>
             </Grid>
 
@@ -125,21 +125,21 @@
                       HorizontalAlignment="Right"/>
 
             <Button Grid.Row="0" Grid.RowSpan="4" Grid.Column="3"
-                    Content="Add to&#x0d;&#x0a;Parameter&#x0d;&#x0a;List"
+                    Content="_Add to&#x0d;&#x0a;Parameter&#x0d;&#x0a;List"
                     Command="{Binding Path=AddToParameterListCommand}"
                     VerticalAlignment="Center"/>
 
-            <Label Grid.Row="4" Grid.Column="0" Content="Subtitle Parameters"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="Subtitle _Parameters"/>
             <ListBox Grid.Row="4" Grid.Column="1" MinHeight="100"
                      ItemsSource="{Binding Path=SubtitleParameters}"
                      SelectedIndex="{Binding Path=SelectedSubtitleParameterIndex}"/>
             <Button Grid.Row="4" Grid.Column="2"
-                    Content="Remove&#x0d;&#x0a;Selected"
+                    Content="_Remove&#x0d;&#x0a;Selected"
                     Command="{Binding Path=RemoveSelectedCommand}"
                     VerticalAlignment="Center"/>
         </Grid>
 
-        <Button Grid.Row="4" Grid.Column="2" Content="_Start" IsDefault="True"
+        <Button Grid.Row="4" Grid.Column="2" Content="S_tart" IsDefault="True"
                 Command="{Binding Path=StartCommand}"/>
     </Grid>
 </UserControl>

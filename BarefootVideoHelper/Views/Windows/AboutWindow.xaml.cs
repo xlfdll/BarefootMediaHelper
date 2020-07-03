@@ -43,7 +43,7 @@ namespace Xlfdll.Windows.Presentation.Dialogs
 
         private void BarefootHyperlink_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://space.bilibili.com/259213");
+            using (Process.Start("https://space.bilibili.com/259213")) { }
         }
     }
 }

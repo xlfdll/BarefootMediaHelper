@@ -5,12 +5,21 @@ using System.Windows.Input;
 
 using Microsoft.Win32;
 
+using MahApps.Metro.Controls.Dialogs;
+
 using Xlfdll.Windows.Presentation;
 
 namespace BarefootVideoHelper
 {
     public class BBCompositionViewModel : BaseViewModel
     {
+        public BBCompositionViewModel(MainViewModel mainViewModel)
+        {
+            this.MainViewModel = mainViewModel;
+        }
+
+        public MainViewModel MainViewModel { get; }
+
         private String _sourceVideoFileName;
         private String _sourceSubtitleFileName;
         private String _outputFileName;
@@ -109,22 +118,46 @@ namespace BarefootVideoHelper
         public RelayCommand<Object> StartCommand
             => new RelayCommand<Object>
             (
-                delegate
+                async delegate
                 {
+                    this.MainViewModel.IsBusy = true;
+
+                    ProgressDialogController controller = await this.MainViewModel.DialogCoordinator.ShowProgressAsync
+                        (this.MainViewModel, String.Empty, "Processing...");
+
+                    controller.SetIndeterminate();
+
                     try
                     {
-                        BBCompositionHelper.ExecuteConversion
+                        if (!File.Exists(this.SourceVideoFileName))
+                        {
+                            throw new FileNotFoundException($"File not found: {this.SourceVideoFileName}");
+                        }
+                        else if (!String.IsNullOrEmpty(this.SourceSubtitleFileName)
+                            && !File.Exists(this.SourceSubtitleFileName))
+                        {
+                            throw new FileNotFoundException($"File not found: {this.SourceSubtitleFileName}");
+                        }
+
+                        await BBCompositionHelper.ExecuteConversion
                             (this.SourceVideoFileName,
                             this.SourceSubtitleFileName,
                             this.OutputFileName,
                             this.IsHD60FPS);
 
-                        MessageBox.Show(App.Current.MainWindow, "Operation completed.", App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Information);
+                        await controller.CloseAsync();
+
+                        await this.MainViewModel.DialogCoordinator.ShowMessageAsync
+                            (this.MainViewModel, String.Empty, "Operation completed.");
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show(App.Current.MainWindow, ex.Message, App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Error);
+
+                        await controller.CloseAsync();
                     }
+
+                    this.MainViewModel.IsBusy = false;
                 },
                 delegate
                 {

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
+
+using Xlfdll.Diagnostics;
 
 namespace BarefootVideoHelper
 {
@@ -10,16 +12,18 @@ namespace BarefootVideoHelper
 
     public static class SubtitleRemovalHelper
     {
-        public static void ExecuteSoftRemoval(String sourceVideoFileName, String outputFileName)
+        public static async Task ExecuteSoftRemoval(String sourceVideoFileName, String outputFileName)
         {
-            using (Process process = Process.Start(MainHelper.FFMPEGPath,
+            using (RedirectedProcess process = new RedirectedProcess(ToolPaths.FFMPEGPath,
                     $"-i \"{sourceVideoFileName}\" -map 0 -map -0:s -codec copy \"{outputFileName}\""))
             {
-                process.WaitForExit();
+                App.LogViewModel.RedirectedProcess = process;
+
+                await process.StartAsync();
             }
         }
 
-        public static void ExecuteHardRemoval
+        public static async Task ExecuteHardRemoval
             (String sourceVideoFileName, String outputFileName,
             IEnumerable<SubtitleParameters> subtitleParameters)
         {
@@ -30,13 +34,15 @@ namespace BarefootVideoHelper
                 Path.GetFileNameWithoutExtension(outputFileName).Replace("#", String.Empty) + ".264");
 
             File.WriteAllText(avsFileName, SubtitleRemovalHelper.WriteHardCodedSubtitleRemovalAVS
-                (sourceVideoFileName, MainHelper.ToolsPath, subtitleParameters));
+                (sourceVideoFileName, ToolPaths.ToolsPath, subtitleParameters));
 
             String arguments = $"-o \"{x264OutputFileName}\" \"{avsFileName}\"";
 
-            using (Process process = Process.Start(MainHelper.AVS4x26xPath, arguments))
+            using (RedirectedProcess process = new RedirectedProcess(ToolPaths.AVS4x26xPath, arguments))
             {
-                process.WaitForExit();
+                App.LogViewModel.RedirectedProcess = process;
+
+                await process.StartAsync();
             }
 
             File.Delete(avsFileName);
@@ -53,9 +59,11 @@ namespace BarefootVideoHelper
 
             arguments = $"-add \"{x264OutputFileName}\" \"{videoOutputFileName}\"";
 
-            using (Process process = Process.Start(MainHelper.MP4BoxPath, arguments))
+            using (RedirectedProcess process = new RedirectedProcess(ToolPaths.MP4BoxPath, arguments))
             {
-                process.WaitForExit();
+                App.LogViewModel.RedirectedProcess = process;
+
+                await process.StartAsync();
             }
 
             File.Delete(x264OutputFileName);
@@ -64,25 +72,18 @@ namespace BarefootVideoHelper
             arguments = $"-v error -select_streams a:0 -show_entries stream=codec_name -of default=nokey=1:noprint_wrappers=1" +
                 $" \"{sourceVideoFileName}\"";
 
-            ProcessStartInfo audioProbeProcessStartInfo = new ProcessStartInfo
-                (MainHelper.FFProbePath, arguments)
-            {
-                RedirectStandardOutput = true,
-                UseShellExecute = false
-            };
-
             String audioFormat = null;
 
-            using (Process process = new Process()
+            using (RedirectedProcess process = new RedirectedProcess(ToolPaths.FFProbePath, arguments))
             {
-                StartInfo = audioProbeProcessStartInfo
-            })
-            {
-                process.Start();
+                await Task.Run(() =>
+                {
+                    process.Start();
 
-                audioFormat = process.StandardOutput.ReadToEnd().Trim();
+                    audioFormat = process.StandardOutput.ReadToEnd().Trim();
 
-                process.WaitForExit();
+                    process.WaitForExit();
+                });
             }
 
             if (!String.IsNullOrEmpty(audioFormat))
@@ -93,18 +94,22 @@ namespace BarefootVideoHelper
 
                 arguments = $"-i \"{sourceVideoFileName}\" -vn -acodec copy \"{audioOutputFileName}\"";
 
-                using (Process process = Process.Start(MainHelper.FFMPEGPath, arguments))
+                using (RedirectedProcess process = new RedirectedProcess(ToolPaths.FFMPEGPath, arguments))
                 {
-                    process.WaitForExit();
+                    App.LogViewModel.RedirectedProcess = process;
+
+                    await process.StartAsync();
                 }
 
                 // FFMPEG - Remux audio stream with packed video stream
                 arguments = $"-i \"{videoOutputFileName}\" -i \"{audioOutputFileName}\" -map 0:v -map 1:a -c copy -y" +
                     $" \"{outputFileName}\"";
 
-                using (Process process = Process.Start(MainHelper.FFMPEGPath, arguments))
+                using (RedirectedProcess process = new RedirectedProcess(ToolPaths.FFMPEGPath, arguments))
                 {
-                    process.WaitForExit();
+                    App.LogViewModel.RedirectedProcess = process;
+
+                    await process.StartAsync();
                 }
 
                 File.Delete(videoOutputFileName);

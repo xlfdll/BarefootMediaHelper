@@ -1,5 +1,7 @@
 ﻿using System;
 
+using MahApps.Metro.Controls.Dialogs;
+
 using Xlfdll.Diagnostics;
 using Xlfdll.Windows.Presentation;
 using Xlfdll.Windows.Presentation.Dialogs;
@@ -8,10 +10,27 @@ namespace BarefootVideoHelper
 {
     public class MainViewModel : BaseViewModel
     {
-        public BBCompositionViewModel BBCompositionViewModel { get; }
-            = new BBCompositionViewModel();
-        public SubtitleRemovalViewModel SubtitleRemovalViewModel { get; }
-            = new SubtitleRemovalViewModel();
+        public MainViewModel(IDialogCoordinator dialogCoordinator)
+        {
+            this.DialogCoordinator = dialogCoordinator;
+        }
+
+        public IDialogCoordinator DialogCoordinator { get; }
+
+        public BBCompositionViewModel BBCompositionViewModel
+            => new BBCompositionViewModel(this);
+        public SubtitleRemovalViewModel SubtitleRemovalViewModel
+            => new SubtitleRemovalViewModel(this);
+        public LogViewModel LogViewModel
+            => new LogViewModel(this);
+
+        private Boolean _isBusy;
+
+        public Boolean IsBusy
+        {
+            get => _isBusy;
+            set => SetField(ref _isBusy, value);
+        }
 
         public RelayCommand<Object> AboutCommand
             => new RelayCommand<Object>

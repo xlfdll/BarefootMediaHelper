@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Threading;
 
 using ControlzEx.Theming;
@@ -20,5 +21,10 @@ namespace BarefootVideoHelper
         {
             MessageBox.Show(e.Exception.Message, Application.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Error);
         }
+
+        public static String Log { get; set; }
+        public static LogWindow LogWindow { get; set; }
+        public static LogViewModel LogViewModel
+            => App.LogWindow?.DataContext as LogViewModel;
     }
 }

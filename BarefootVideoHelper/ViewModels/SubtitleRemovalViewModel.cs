@@ -6,20 +6,28 @@ using System.Windows.Input;
 
 using Microsoft.Win32;
 
+using MahApps.Metro.Controls.Dialogs;
+
 using Xlfdll.Windows.Presentation;
 
 namespace BarefootVideoHelper
 {
     public class SubtitleRemovalViewModel : BaseViewModel
     {
-        public SubtitleRemovalViewModel()
+        public SubtitleRemovalViewModel(MainViewModel mainViewModel)
         {
+            this.MainViewModel = mainViewModel;
+
             this.SelectedModeIndex = 0;
             this.ApplyToAllFrames = true;
             this.SubtitleParameters = new ObservableCollection<SubtitleParameters>();
 
             this.NewSubtitleParameterInput();
         }
+
+        public MainViewModel MainViewModel { get; }
+
+        public IDialogCoordinator DialogCoordinator { get; }
 
         private Int32 _selectedModeIndex;
         private String _sourceVideoFileName;
@@ -197,22 +205,34 @@ namespace BarefootVideoHelper
         public RelayCommand<Object> StartCommand
             => new RelayCommand<Object>
             (
-                delegate
+                async delegate
                 {
+                    this.MainViewModel.IsBusy = true;
+
+                    ProgressDialogController controller = await this.MainViewModel.DialogCoordinator.ShowProgressAsync
+                        (this.MainViewModel, String.Empty, "Processing...");
+
+                    controller.SetIndeterminate();
+
                     try
                     {
+                        if (!File.Exists(this.SourceVideoFileName))
+                        {
+                            throw new FileNotFoundException($"File not found: {this.SourceVideoFileName}");
+                        }
+
                         SubtitleRemovalMode mode = (SubtitleRemovalMode)this.SelectedModeIndex;
 
                         switch (mode)
                         {
                             case SubtitleRemovalMode.Soft:
-                                SubtitleRemovalHelper.ExecuteSoftRemoval
+                                await SubtitleRemovalHelper.ExecuteSoftRemoval
                                     (this.SourceVideoFileName,
                                     this.OutputFileName);
 
                                 break;
                             case SubtitleRemovalMode.Hard:
-                                SubtitleRemovalHelper.ExecuteHardRemoval
+                                await SubtitleRemovalHelper.ExecuteHardRemoval
                                         (this.SourceVideoFileName,
                                         this.OutputFileName,
                                         this.SubtitleParameters);
@@ -222,12 +242,19 @@ namespace BarefootVideoHelper
                                 throw new ArgumentException("Unsupported mode");
                         }
 
-                        MessageBox.Show(App.Current.MainWindow, "Operation completed.", App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Information);
+                        await controller.CloseAsync();
+
+                        await this.MainViewModel.DialogCoordinator.ShowMessageAsync
+                            (this.MainViewModel, String.Empty, "Operation completed.");
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show(App.Current.MainWindow, ex.Message, App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Error);
+
+                        await controller.CloseAsync();
                     }
+
+                    this.MainViewModel.IsBusy = false;
                 },
                 delegate
                 {
