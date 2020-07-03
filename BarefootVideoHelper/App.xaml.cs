@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -19,7 +20,15 @@ namespace BarefootVideoHelper
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show(e.Exception.Message, Application.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Error);
+            // Ignore Win32Exception raised by MetroWindow when exiting
+            if (e.Exception is Win32Exception)
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                MessageBox.Show(e.Exception.Message, Application.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public static String Log { get; set; }
