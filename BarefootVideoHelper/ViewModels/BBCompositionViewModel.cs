@@ -39,6 +39,8 @@ namespace BarefootVideoHelper
 
                 this.OutputFileName = _sourceVideoFileName.Replace(extension, String.Empty) + "-OUTPUT" + ".mp4";
 
+                // Force re-evaluate CanExecute on all commands
+                // Enable the Start button immediately
                 CommandManager.InvalidateRequerySuggested();
             }
         }
