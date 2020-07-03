@@ -3,6 +3,11 @@ A video processing utility / frontend used by Barefoot Invader team
 
 Made for [Barefoot Invader (素足星侵略者)](https://space.bilibili.com/259213)
 
+<p align="center">
+  <img src="https://github.com/xlfdll/xlfdll.github.io/raw/master/images/projects/BarefootVideoHelper.png"
+       alt="Barefoot Video Helper" width="1024">
+</p>
+
 ## System Requirements
 * .NET Framework 4.8
 
