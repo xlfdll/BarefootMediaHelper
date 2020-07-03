@@ -1,6 +1,8 @@
 # Barefoot Video Helper
 A video processing utility / frontend used by Barefoot Invader team
 
+Made for [Barefoot Invader (素足星侵略者)](https://space.bilibili.com/259213)
+
 ## System Requirements
 * .NET Framework 4.8
 
@@ -12,6 +14,8 @@ A video processing utility / frontend used by Barefoot Invader team
 Before the build, generate-build-number.sh needs to be executed in a Git / Bash shell to generate build information code file (BuildInfo.cs).
 
 ## External Sources
+User interface is based on MahApps.Metro library, which is licensed under MIT license.
+
 Hard-coded subtitle removal algorithm and associated files are from:
 
 https://forum.videohelp.com/threads/358181-How-to-remove-hard-coded-subtitles-HELP-PLEASE
