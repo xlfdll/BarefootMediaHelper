@@ -130,7 +130,7 @@
                     VerticalAlignment="Center"/>
 
             <Label Grid.Row="4" Grid.Column="0" Content="Subtitle _Parameters"/>
-            <ListBox Grid.Row="4" Grid.Column="1" MinHeight="100"
+            <ListBox Grid.Row="4" Grid.Column="1" Height="100"
                      ItemsSource="{Binding Path=SubtitleParameters}"
                      SelectedIndex="{Binding Path=SelectedSubtitleParameterIndex}"/>
             <Button Grid.Row="4" Grid.Column="2"
