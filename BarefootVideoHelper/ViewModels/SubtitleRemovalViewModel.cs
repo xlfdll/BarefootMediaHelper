@@ -27,8 +27,6 @@ namespace BarefootVideoHelper
 
         public MainViewModel MainViewModel { get; }
 
-        public IDialogCoordinator DialogCoordinator { get; }
-
         private Int32 _selectedModeIndex;
         private String _sourceVideoFileName;
         private String _outputFileName;
