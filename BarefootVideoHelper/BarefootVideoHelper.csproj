@@ -72,6 +72,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\UserControls\FormatConvertUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\LogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -109,6 +113,11 @@
     </Compile>
     <Compile Include="..\XDLibrary\Xlfdll.Windows.Presentation\RelayCommand.cs">
       <Link>Base\Windows\Presentation\RelayCommand.cs</Link>
+    </Compile>
+    <Compile Include="Helpers\FormatConvertHelper.cs" />
+    <Compile Include="ViewModels\FormatConvertViewModel.cs" />
+    <Compile Include="Views\UserControls\FormatConvertUserControl.xaml.cs">
+      <DependentUpon>FormatConvertUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\LogWindow.xaml.cs">
       <DependentUpon>LogWindow.xaml</DependentUpon>

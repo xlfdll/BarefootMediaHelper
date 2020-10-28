@@ -63,5 +63,8 @@
         <TabItem Header="Subtitle Removal">
             <local:SubtitleRemovalUserControl DataContext="{Binding Path=SubtitleRemovalViewModel}"/>
         </TabItem>
+        <TabItem Header="Format Convert">
+            <local:FormatConvertUserControl DataContext="{Binding Path=FormatConvertViewModel}"/>
+        </TabItem>
     </TabControl>
 </metro:MetroWindow>
