@@ -16,7 +16,7 @@ namespace BarefootVideoHelper
             InitializeComponent();
         }
 
-        private void SourceVideoFileNameTextBox_PreviewDragOver(object sender, DragEventArgs e)
+        private void SourceFileNameTextBox_PreviewDragOver(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -38,15 +38,6 @@ namespace BarefootVideoHelper
                 {
                     viewModel.SourceVideoFileName = files[0];
                 }
-            }
-        }
-
-        private void SourceSubtitleFileNameTextBox_PreviewDragOver(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                e.Effects = DragDropEffects.Copy;
-                e.Handled = true; // Only stop handling after a file drop
             }
         }
 
