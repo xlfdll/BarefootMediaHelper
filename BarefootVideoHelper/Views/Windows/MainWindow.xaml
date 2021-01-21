@@ -10,6 +10,7 @@
         Title="Barefoot Video Helper" Icon="pack://application:,,,/Barefoot.ico"
         metro:TitleCharacterCasing="Normal" GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
         WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
+        metroDialogs:DialogParticipation.Register="{Binding}"
         Width="720" SizeToContent="Height"
         Loaded="MainWindow_Loaded">
 
@@ -56,7 +57,7 @@
         </Style>
     </Window.Resources>
 
-    <TabControl metroDialogs:DialogParticipation.Register="{Binding}">
+    <TabControl metro:TabControlHelper.Underlined="TabPanel">
         <TabItem Header="BB Composition">
             <local:BBCompositionUserControl DataContext="{Binding Path=BBCompositionViewModel}"/>
         </TabItem>
