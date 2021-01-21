@@ -79,7 +79,7 @@
                 <Label Grid.Column="2" Content="Subtitle Top _Left Y"/>
                 <metro:NumericUpDown Grid.Column="3" Value="{Binding Path=NewSubtitleTopLeftY}"/>
             </Grid>
-            
+
             <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" SharedSizeGroup="Labels"/>
@@ -119,10 +119,10 @@
                 <metro:NumericUpDown Grid.Column="3" Value="{Binding Path=NewSubtitleEndFrameNumber}"/>
             </Grid>
 
-            <CheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
-                      Content="Apply to all video frames"
-                      IsChecked="{Binding Path=ApplyToAllFrames}"
-                      HorizontalAlignment="Right"/>
+            <metro:ToggleSwitch Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                                Content="Apply to all video frames"
+                                IsOn="{Binding Path=ApplyToAllFrames}"
+                                HorizontalAlignment="Right"/>
 
             <Button Grid.Row="0" Grid.RowSpan="4" Grid.Column="3"
                     Content="_Add to&#x0d;&#x0a;Parameter&#x0d;&#x0a;List"

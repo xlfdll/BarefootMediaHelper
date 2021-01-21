@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:local="clr-namespace:BarefootVideoHelper"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -41,8 +42,8 @@
                 Command="{Binding Path=BrowseOutputFileCommand}"/>
 
         <Label Grid.Row="3" Grid.Column="0" Content="_Mode"/>
-        <CheckBox Grid.Row="3" Grid.Column="1" Content="Source video is _60fps"
-                  IsChecked="{Binding Path=IsHD60FPS}"/>
+        <metro:ToggleSwitch Grid.Row="3" Grid.Column="1" Content="Source video is 60fps"
+                            IsOn="{Binding Path=IsHD60FPS}"/>
 
         <Button Grid.Row="3" Grid.Column="2" Content="Start _Convert" IsDefault="True"
                 Command="{Binding Path=StartCommand}"/>
