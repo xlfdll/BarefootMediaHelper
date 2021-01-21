@@ -9,9 +9,9 @@ namespace BarefootVideoHelper
     /// <summary>
     /// FLV2MP4FormatUserControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class FormatConvertUserControl : UserControl
+    public partial class FormatConversionUserControl : UserControl
     {
-        public FormatConvertUserControl()
+        public FormatConversionUserControl()
         {
             InitializeComponent();
         }
@@ -32,7 +32,7 @@ namespace BarefootVideoHelper
 
             if (files != null && supportedExtensions.Contains(Path.GetExtension(files[0])))
             {
-                FormatConvertViewModel viewModel = this.DataContext as FormatConvertViewModel;
+                FormatConversionViewModel viewModel = this.DataContext as FormatConversionViewModel;
 
                 if (viewModel != null)
                 {

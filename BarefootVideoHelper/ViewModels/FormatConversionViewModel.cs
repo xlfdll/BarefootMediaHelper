@@ -11,9 +11,9 @@ using Xlfdll.Windows.Presentation;
 
 namespace BarefootVideoHelper
 {
-    public class FormatConvertViewModel : ViewModelBase
+    public class FormatConversionViewModel : ViewModelBase
     {
-        public FormatConvertViewModel(MainViewModel mainViewModel)
+        public FormatConversionViewModel(MainViewModel mainViewModel)
         {
             this.MainViewModel = mainViewModel;
 

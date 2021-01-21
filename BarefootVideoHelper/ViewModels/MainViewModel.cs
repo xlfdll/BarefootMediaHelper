@@ -21,8 +21,8 @@ namespace BarefootVideoHelper
             => new BBCompositionViewModel(this);
         public SubtitleRemovalViewModel SubtitleRemovalViewModel
             => new SubtitleRemovalViewModel(this);
-        public FormatConvertViewModel FormatConvertViewModel
-            => new FormatConvertViewModel(this);
+        public FormatConversionViewModel FormatConvertViewModel
+            => new FormatConversionViewModel(this);
         public LogViewModel LogViewModel
             => new LogViewModel(this);
 
