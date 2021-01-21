@@ -104,7 +104,7 @@ namespace BarefootVideoHelper
             (
                 delegate
                 {
-                    OpenFileDialog dialog = new OpenFileDialog()
+                    SaveFileDialog dialog = new SaveFileDialog()
                     {
                         Filter = "MPEG-4 Part 14 (*.mp4)|*.mp4|Flash Video (*.flv)|*.flv|All Files (*.*)|*.*",
                         FileName = this.OutputFileName

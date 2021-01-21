@@ -100,7 +100,7 @@ namespace BarefootVideoHelper
             (
                 delegate
                 {
-                    OpenFileDialog dialog = new OpenFileDialog()
+                    SaveFileDialog dialog = new SaveFileDialog()
                     {
                         FileName = this.OutputFileName
                     };
