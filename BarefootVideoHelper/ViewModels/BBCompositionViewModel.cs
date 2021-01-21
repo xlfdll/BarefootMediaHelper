@@ -11,7 +11,7 @@ using Xlfdll.Windows.Presentation;
 
 namespace BarefootVideoHelper
 {
-    public class BBCompositionViewModel : BaseViewModel
+    public class BBCompositionViewModel : ViewModelBase
     {
         public BBCompositionViewModel(MainViewModel mainViewModel)
         {

@@ -7,7 +7,7 @@ using Xlfdll.Windows.Presentation;
 
 namespace BarefootVideoHelper
 {
-    public class LogViewModel : BaseViewModel
+    public class LogViewModel : ViewModelBase
     {
         public LogViewModel(MainViewModel mainViewModel)
         {

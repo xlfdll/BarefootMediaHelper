@@ -133,7 +133,7 @@
     <Compile Include="ToolPaths.cs" />
     <Compile Include="Helpers\SubtitleRemovalHelper.cs" />
     <Compile Include="Models\SubtitleParameters.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\BBCompositionViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SubtitleRemovalViewModel.cs" />

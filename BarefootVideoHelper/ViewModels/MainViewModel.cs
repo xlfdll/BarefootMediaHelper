@@ -8,7 +8,7 @@ using Xlfdll.Windows.Presentation.Dialogs;
 
 namespace BarefootVideoHelper
 {
-    public class MainViewModel : BaseViewModel
+    public class MainViewModel : ViewModelBase
     {
         public MainViewModel(IDialogCoordinator dialogCoordinator)
         {

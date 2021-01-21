@@ -12,7 +12,7 @@ using Xlfdll.Windows.Presentation;
 
 namespace BarefootVideoHelper
 {
-    public class SubtitleRemovalViewModel : BaseViewModel
+    public class SubtitleRemovalViewModel : ViewModelBase
     {
         public SubtitleRemovalViewModel(MainViewModel mainViewModel)
         {
