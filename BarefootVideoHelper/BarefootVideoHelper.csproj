@@ -72,7 +72,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\UserControls\FormatConversionUserControl.xaml">
+    <Page Include="Views\UserControls\Modules\FormatConversionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -84,11 +84,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\UserControls\SubtitleRemovalUserControl.xaml">
+    <Page Include="Views\UserControls\Modules\SubtitleRemovalUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\BBCompositionUserControl.xaml">
+    <Page Include="Views\UserControls\Modules\BBCompositionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -115,14 +115,14 @@
       <Link>Base\Windows\Presentation\RelayCommand.cs</Link>
     </Compile>
     <Compile Include="Helpers\FormatConvertHelper.cs" />
-    <Compile Include="ViewModels\FormatConversionViewModel.cs" />
-    <Compile Include="Views\UserControls\FormatConversionUserControl.xaml.cs">
+    <Compile Include="ViewModels\Modules\FormatConversionViewModel.cs" />
+    <Compile Include="Views\UserControls\Modules\FormatConversionUserControl.xaml.cs">
       <DependentUpon>FormatConversionUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\LogWindow.xaml.cs">
       <DependentUpon>LogWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\LogViewModel.cs" />
+    <Compile Include="ViewModels\Windows\LogViewModel.cs" />
     <Compile Include="Views\Windows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
@@ -134,13 +134,13 @@
     <Compile Include="Helpers\SubtitleRemovalHelper.cs" />
     <Compile Include="Models\SubtitleParameters.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="ViewModels\BBCompositionViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\SubtitleRemovalViewModel.cs" />
-    <Compile Include="Views\UserControls\SubtitleRemovalUserControl.xaml.cs">
+    <Compile Include="ViewModels\Modules\BBCompositionViewModel.cs" />
+    <Compile Include="ViewModels\Windows\MainViewModel.cs" />
+    <Compile Include="ViewModels\Modules\SubtitleRemovalViewModel.cs" />
+    <Compile Include="Views\UserControls\Modules\SubtitleRemovalUserControl.xaml.cs">
       <DependentUpon>SubtitleRemovalUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\BBCompositionUserControl.xaml.cs">
+    <Compile Include="Views\UserControls\Modules\BBCompositionUserControl.xaml.cs">
       <DependentUpon>BBCompositionUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BBCompositionHelper.cs" />
@@ -182,5 +182,6 @@
   <ItemGroup>
     <Resource Include="Images\Barefoot.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
