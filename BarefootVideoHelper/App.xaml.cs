@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -20,8 +19,8 @@ namespace BarefootVideoHelper
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            // Ignore Win32Exception raised by MetroWindow when exiting
-            if (e.Exception is Win32Exception)
+            // Ignore exceptions raised by MetroWindow when exiting
+            if (e.Exception.Source == "PresentationCore")
             {
                 e.Handled = true;
             }
