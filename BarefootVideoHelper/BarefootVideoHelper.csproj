@@ -72,7 +72,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\UserControls\Modules\FormatConversionUserControl.xaml">
+    <Page Include="Views\Controls\Modules\FormatConversionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -84,11 +84,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\UserControls\Modules\SubtitleRemovalUserControl.xaml">
+    <Page Include="Views\Controls\Modules\SubtitleRemovalUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\Modules\BBCompositionUserControl.xaml">
+    <Page Include="Views\Controls\Modules\BBCompositionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,7 +116,7 @@
     </Compile>
     <Compile Include="Helpers\FormatConvertHelper.cs" />
     <Compile Include="ViewModels\Modules\FormatConversionViewModel.cs" />
-    <Compile Include="Views\UserControls\Modules\FormatConversionUserControl.xaml.cs">
+    <Compile Include="Views\Controls\Modules\FormatConversionUserControl.xaml.cs">
       <DependentUpon>FormatConversionUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\LogWindow.xaml.cs">
@@ -137,10 +137,10 @@
     <Compile Include="ViewModels\Modules\BBCompositionViewModel.cs" />
     <Compile Include="ViewModels\Windows\MainViewModel.cs" />
     <Compile Include="ViewModels\Modules\SubtitleRemovalViewModel.cs" />
-    <Compile Include="Views\UserControls\Modules\SubtitleRemovalUserControl.xaml.cs">
+    <Compile Include="Views\Controls\Modules\SubtitleRemovalUserControl.xaml.cs">
       <DependentUpon>SubtitleRemovalUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\Modules\BBCompositionUserControl.xaml.cs">
+    <Compile Include="Views\Controls\Modules\BBCompositionUserControl.xaml.cs">
       <DependentUpon>BBCompositionUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BBCompositionHelper.cs" />
