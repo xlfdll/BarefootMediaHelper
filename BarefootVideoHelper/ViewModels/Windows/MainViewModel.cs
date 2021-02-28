@@ -6,6 +6,8 @@ using Xlfdll.Diagnostics;
 using Xlfdll.Windows.Presentation;
 using Xlfdll.Windows.Presentation.Dialogs;
 
+using BarefootVideoHelper.Properties;
+
 namespace BarefootVideoHelper
 {
     public class MainViewModel : ViewModelBase
@@ -42,7 +44,8 @@ namespace BarefootVideoHelper
                     AboutWindow aboutWindow = new AboutWindow
                         (App.Current.MainWindow,
                         AssemblyMetadata.EntryAssemblyMetadata,
-                        new ApplicationPackUri("/Images/Barefoot.png"));
+                        new ApplicationPackUri("/Images/Barefoot.png"),
+                        Resources.License);
 
                     aboutWindow.ShowDialog();
                 }

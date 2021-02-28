@@ -117,4 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="License" xml:space="preserve">
+    <value>User interface is based on MahApps.Metro library, which is licensed under MIT license.
+
+Hard-coded subtitle removal algorithm and associated files are from:
+
+https://forum.videohelp.com/threads/358181-How-to-remove-hard-coded-subtitles-HELP-PLEASE</value>
+  </data>
 </root>

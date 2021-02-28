@@ -59,5 +59,18 @@ namespace BarefootVideoHelper.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   User interface is based on MahApps.Metro library, which is licensed under MIT license.
+        ///
+        ///Hard-coded subtitle removal algorithm and associated files are from:
+        ///
+        ///https://forum.videohelp.com/threads/358181-How-to-remove-hard-coded-subtitles-HELP-PLEASE に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string License {
+            get {
+                return ResourceManager.GetString("License", resourceCulture);
+            }
+        }
     }
 }
