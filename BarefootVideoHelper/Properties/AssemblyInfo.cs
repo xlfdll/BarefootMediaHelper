@@ -12,7 +12,7 @@ using Xlfdll;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Xlfdll Workstation")]
 [assembly: AssemblyProduct("Barefoot Video Helper")]
-[assembly: AssemblyCopyright("© 2018 Xlfdll Workstation")]
+[assembly: AssemblyCopyright("© 2018-2021 Xlfdll Workstation")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
