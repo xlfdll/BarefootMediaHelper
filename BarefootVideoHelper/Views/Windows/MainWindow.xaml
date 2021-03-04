@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:BarefootVideoHelper"
         mc:Ignorable="d"
         Title="Barefoot Video Helper" Icon="pack://application:,,,/Barefoot.ico"
-        metro:TitleCharacterCasing="Normal" GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
+        TitleCharacterCasing="Normal" GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
         WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
         metroDialogs:DialogParticipation.Register="{Binding}"
         Width="720" SizeToContent="Height"
