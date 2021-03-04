@@ -182,6 +182,8 @@
   <ItemGroup>
     <Resource Include="Images\Barefoot.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\ExternalSources.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

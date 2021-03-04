@@ -45,7 +45,7 @@ namespace BarefootVideoHelper
                         (App.Current.MainWindow,
                         AssemblyMetadata.EntryAssemblyMetadata,
                         new ApplicationPackUri("/Images/Barefoot.png"),
-                        Resources.License);
+                        Resources.ExternalSources);
 
                     aboutWindow.ShowDialog();
                 }
