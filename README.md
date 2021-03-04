@@ -19,8 +19,7 @@ Made for [Barefoot Invader (素足星侵略者)](https://space.bilibili.com/2592
 Before the build, generate-build-number.sh needs to be executed in a Git / Bash shell to generate build information code file (BuildInfo.cs).
 
 ## External Sources
-User interface is based on MahApps.Metro library, which is licensed under MIT license.
+User interface is based on [MahApps.Metro](https://github.com/MahApps/MahApps.Metro) library, which is licensed under [MIT](https://github.com/MahApps/MahApps.Metro/blob/develop/LICENSE) license.
 
 Hard-coded subtitle removal algorithm and associated files are from:
-
 https://forum.videohelp.com/threads/358181-How-to-remove-hard-coded-subtitles-HELP-PLEASE
