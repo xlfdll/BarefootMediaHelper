@@ -30,7 +30,7 @@ namespace BarefootVideoHelper
             String[] files = e.Data.GetData(DataFormats.FileDrop) as String[];
             String[] supportedExtensions = new String[] { ".mp4", ".flv", ".mkv", ".avi" };
 
-            if (files != null && supportedExtensions.Contains(Path.GetExtension(files[0])))
+            if (files != null && supportedExtensions.Contains(Path.GetExtension(files[0]).ToLowerInvariant()))
             {
                 SubtitleRemovalViewModel viewModel = this.DataContext as SubtitleRemovalViewModel;
 

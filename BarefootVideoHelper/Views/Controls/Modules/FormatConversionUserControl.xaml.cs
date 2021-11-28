@@ -30,7 +30,7 @@ namespace BarefootVideoHelper
             String[] files = e.Data.GetData(DataFormats.FileDrop) as String[];
             String[] supportedExtensions = new String[] { ".flv" };
 
-            if (files != null && supportedExtensions.Contains(Path.GetExtension(files[0])))
+            if (files != null && supportedExtensions.Contains(Path.GetExtension(files[0]).ToLowerInvariant()))
             {
                 FormatConversionViewModel viewModel = this.DataContext as FormatConversionViewModel;
 
