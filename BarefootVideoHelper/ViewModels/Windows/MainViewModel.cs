@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Shell;
 
 using MahApps.Metro.Controls.Dialogs;
 
@@ -32,9 +33,20 @@ namespace BarefootVideoHelper
 
         public Boolean IsBusy
         {
-            get => _isBusy;
-            set => SetField(ref _isBusy, value);
+            get
+            {
+                return _isBusy;
+            }
+            set
+            {
+                SetField(ref _isBusy, value);
+
+                OnPropertyChanged(nameof(this.IsTaskProgressOn));
+            }
         }
+
+        public TaskbarItemProgressState IsTaskProgressOn
+            => (TaskbarItemProgressState)Convert.ToInt32(_isBusy);
 
         public RelayCommand<Object> AboutCommand
             => new RelayCommand<Object>

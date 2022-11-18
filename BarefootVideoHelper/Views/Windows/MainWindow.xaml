@@ -20,6 +20,10 @@
         </metro:WindowCommands>
     </metro:MetroWindow.RightWindowCommands>
 
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo ProgressState="{Binding Path=IsTaskProgressOn}"/>
+    </Window.TaskbarItemInfo>
+
     <Window.Resources>
         <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
             <Setter Property="VerticalAlignment" Value="Center"/>
