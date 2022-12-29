@@ -25,6 +25,7 @@
     </Window.TaskbarItemInfo>
 
     <Window.Resources>
+        <Style TargetType="TabControl" BasedOn="{StaticResource MahApps.Styles.TabControl.AnimatedSingleRow}"/>
         <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -70,6 +71,9 @@
         </TabItem>
         <TabItem Header="Format Conversion">
             <local:FormatConversionUserControl DataContext="{Binding Path=FormatConvertViewModel}"/>
+        </TabItem>
+        <TabItem Header="Video Download">
+            <local:VideoDownloadUserControl DataContext="{Binding Path=VideoDownloadViewModel}"/>
         </TabItem>
     </TabControl>
 </metro:MetroWindow>

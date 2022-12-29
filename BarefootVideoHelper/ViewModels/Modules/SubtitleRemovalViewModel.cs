@@ -22,7 +22,7 @@ namespace BarefootVideoHelper
             this.ApplyToAllFrames = true;
             this.SubtitleParameters = new ObservableCollection<SubtitleParameters>();
 
-            this.NewSubtitleParameterInput();
+            this.NewInput();
         }
 
         public MainViewModel MainViewModel { get; }
@@ -180,7 +180,7 @@ namespace BarefootVideoHelper
 
                     this.SubtitleParameters.Add(subtitleParameters);
 
-                    this.NewSubtitleParameterInput();
+                    this.NewInput();
                 }
             );
 
@@ -271,7 +271,7 @@ namespace BarefootVideoHelper
                 }
             );
 
-        private void NewSubtitleParameterInput()
+        private void NewInput()
         {
             this.NewSubtitleTopLeftX = 0;
             this.NewSubtitleTopLeftY = 0;
