@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Forms;
 
 using Xlfdll.Windows.Presentation;
@@ -17,7 +18,6 @@ namespace BarefootVideoHelper
             this.SelectedQualityIndex = 0;
             this.OutputDirectoryName = VideoDownloadHelper.GetUserDownloadFolderPath();
             this.DoesSkipSponsor = true;
-            this.IsURLValid = true;
 
             this.DownloadRequests = new ObservableCollection<VideoDownloadRequest>();
         }
@@ -29,7 +29,7 @@ namespace BarefootVideoHelper
         private Int32 _selectedVideoDownloadRequestIndex;
         private String _outputDirectoryName;
         private Boolean _doesSkipSponsor;
-        private Boolean _isURLValid;
+        private String _urlErrorCode;
 
         public String VideoURL
         {
@@ -61,10 +61,10 @@ namespace BarefootVideoHelper
             set => SetField(ref _doesSkipSponsor, value);
         }
 
-        public Boolean IsURLValid
+        public String URLErrorCode
         {
-            get => _isURLValid;
-            set => SetField(ref _isURLValid, value);
+            get => _urlErrorCode;
+            set => SetField(ref _urlErrorCode, value);
         }
 
         public ObservableCollection<VideoDownloadRequest> DownloadRequests { get; }
@@ -74,21 +74,34 @@ namespace BarefootVideoHelper
             (
                 async delegate
                 {
-                    this.IsURLValid = this.CheckVideoURL(this.VideoURL);
+                    this.URLErrorCode = null;
 
-                    if (this.IsURLValid)
+                    Boolean isURLValid = this.CheckVideoURL(this.VideoURL);
+
+                    if (isURLValid)
                     {
                         this.MainViewModel.IsBusy = true;
 
-                        VideoDownloadRequest videoDownloadRequest = new VideoDownloadRequest(this.VideoURL);
+                        if (!this.DownloadRequests.Any(req => req.URL == this.VideoURL))
+                        {
+                            VideoDownloadRequest videoDownloadRequest = new VideoDownloadRequest(this.VideoURL);
 
-                        await videoDownloadRequest.RetrieveVideoTitle();
+                            await videoDownloadRequest.RetrieveVideoTitle();
 
-                        this.DownloadRequests.Add(videoDownloadRequest);
+                            this.DownloadRequests.Add(videoDownloadRequest);
+                        }
+                        else
+                        {
+                            this.URLErrorCode = "DuplicatedURL";
+                        }
 
                         this.NewInput();
 
                         this.MainViewModel.IsBusy = false;
+                    }
+                    else
+                    {
+                        this.URLErrorCode = "URLNotValid";
                     }
                 },
                 delegate

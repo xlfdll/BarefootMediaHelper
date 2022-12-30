@@ -63,17 +63,22 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="Video URL is not valid or not supported."
-                       Foreground="Red" Margin="10,0" VerticalAlignment="Center">
+            <TextBlock Grid.Column="0" VerticalAlignment="Center"
+                       Foreground="Red" Margin="10,0">
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding Path=IsURLValid}"
-                                     Value="False">
+                            <DataTrigger Binding="{Binding Path=URLErrorCode}" Value="URLNotValid">
+                                <Setter Property="Text" Value="Video URL is not valid or not supported."/>
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=URLErrorCode}" Value="DuplicatedURL">
+                                <Setter Property="Text" Value="Video URL is already in the list."/>
                                 <Setter Property="Visibility" Value="Visible"/>
                             </DataTrigger>
                         </Style.Triggers>
 
+                        <Setter Property="Text" Value="{x:Null}"/>
                         <Setter Property="Visibility" Value="Collapsed"/>
                     </Style>
                 </TextBlock.Style>
