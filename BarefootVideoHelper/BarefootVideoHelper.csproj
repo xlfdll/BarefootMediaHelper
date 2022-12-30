@@ -120,6 +120,12 @@
     <Compile Include="..\XDLibrary\Xlfdll.Windows.Presentation\RelayCommand.cs">
       <Link>Base\Windows\Presentation\RelayCommand.cs</Link>
     </Compile>
+    <Compile Include="..\XDLibrary\Xlfdll.Windows\API\UserShell.cs">
+      <Link>Base\Windows\Shell\UserShell.cs</Link>
+    </Compile>
+    <Compile Include="..\XDLibrary\Xlfdll.Windows\Environment\SpecialFolders.cs">
+      <Link>Base\Windows\Shell\SpecialFolders.cs</Link>
+    </Compile>
     <Compile Include="Helpers\FormatConvertHelper.cs" />
     <Compile Include="Helpers\VideoDownloadHelper.cs" />
     <Compile Include="Models\VideoDownloadRequest.cs" />

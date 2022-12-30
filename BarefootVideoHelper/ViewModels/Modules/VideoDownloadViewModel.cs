@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Forms;
+using System.Windows;
 
+using WinForms = System.Windows.Forms;
+
+using MahApps.Metro.Controls.Dialogs;
+
+using Xlfdll.Windows;
 using Xlfdll.Windows.Presentation;
 
 using BarefootVideoHelper.Helpers;
@@ -16,8 +21,8 @@ namespace BarefootVideoHelper
             this.MainViewModel = mainViewModel;
 
             this.SelectedQualityIndex = 0;
-            this.OutputDirectoryName = VideoDownloadHelper.GetUserDownloadFolderPath();
-            this.DoesSkipSponsor = true;
+            this.OutputFolderName = UserFolders.Downloads;
+            this.DoesSkipSponsor = false;
 
             this.DownloadRequests = new ObservableCollection<VideoDownloadRequest>();
         }
@@ -27,7 +32,7 @@ namespace BarefootVideoHelper
         private String _videoURL;
         private Int32 _selectedQualityIndex;
         private Int32 _selectedVideoDownloadRequestIndex;
-        private String _outputDirectoryName;
+        private String _outputFolderName;
         private Boolean _doesSkipSponsor;
         private String _urlErrorCode;
 
@@ -49,10 +54,10 @@ namespace BarefootVideoHelper
             set => SetField(ref _selectedVideoDownloadRequestIndex, value);
         }
 
-        public String OutputDirectoryName
+        public String OutputFolderName
         {
-            get => _outputDirectoryName;
-            set => SetField(ref _outputDirectoryName, value);
+            get => _outputFolderName;
+            set => SetField(ref _outputFolderName, value);
         }
 
         public Boolean DoesSkipSponsor
@@ -75,6 +80,7 @@ namespace BarefootVideoHelper
                 async delegate
                 {
                     this.URLErrorCode = null;
+                    this.VideoURL = this.VideoURL.Trim();
 
                     Boolean isURLValid = this.CheckVideoURL(this.VideoURL);
 
@@ -106,7 +112,7 @@ namespace BarefootVideoHelper
                 },
                 delegate
                 {
-                    return !String.IsNullOrEmpty(this.VideoURL);
+                    return !String.IsNullOrEmpty(this.VideoURL?.Trim());
                 }
             );
 
@@ -128,22 +134,62 @@ namespace BarefootVideoHelper
                 }
             );
 
-        public RelayCommand<Object> BrowseOutputDirectoryCommand
+        public RelayCommand<Object> BrowseOutputFolderCommand
             => new RelayCommand<Object>
             (
                 delegate
                 {
-                    using (FolderBrowserDialog dlg = new FolderBrowserDialog())
+                    using (WinForms.FolderBrowserDialog dlg = new WinForms.FolderBrowserDialog())
                     {
                         dlg.Description = "Select a folder to save videos";
-                        dlg.SelectedPath = this.OutputDirectoryName;
+                        dlg.SelectedPath = this.OutputFolderName;
                         dlg.ShowNewFolderButton = true;
 
-                        if (dlg.ShowDialog() == DialogResult.OK)
+                        if (dlg.ShowDialog() == WinForms.DialogResult.OK)
                         {
-                            this.OutputDirectoryName = dlg.SelectedPath;
+                            this.OutputFolderName = dlg.SelectedPath;
                         }
                     }
+                }
+            );
+
+        public RelayCommand<Object> DownloadCommand
+            => new RelayCommand<Object>
+            (
+                async delegate
+                {
+                    this.MainViewModel.IsBusy = true;
+
+                    ProgressDialogController controller = await this.MainViewModel.DialogCoordinator.ShowProgressAsync
+                        (this.MainViewModel, String.Empty, "Processing...");
+
+                    controller.SetIndeterminate();
+
+                    try
+                    {
+                        await VideoDownloadHelper.ExecuteVideoDownload
+                            (this.DownloadRequests,
+                            this.OutputFolderName,
+                            this.SelectedQualityIndex,
+                            this.DoesSkipSponsor);
+
+                        await controller.CloseAsync();
+
+                        await this.MainViewModel.DialogCoordinator.ShowMessageAsync
+                            (this.MainViewModel, String.Empty, "Operation completed.");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(App.Current.MainWindow, ex.Message, App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Error);
+
+                        await controller.CloseAsync();
+                    }
+
+                    this.MainViewModel.IsBusy = false;
+                },
+                delegate
+                {
+                    return this.DownloadRequests.Count > 0;
                 }
             );
 

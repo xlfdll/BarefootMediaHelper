@@ -1,25 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+
+using Xlfdll.Diagnostics;
 
 namespace BarefootVideoHelper.Helpers
 {
     public static class VideoDownloadHelper
     {
-        [DllImport("shell32",
-        CharSet = CharSet.Unicode, ExactSpelling = true, PreserveSig = false)]
-        private static extern String SHGetKnownFolderPath([MarshalAs(UnmanagedType.LPStruct)] Guid rfid, UInt32 dwFlags, IntPtr hToken);
-
-        public static String GetUserDownloadFolderPath()
-        {
-            Guid guid = new Guid("374DE290-123F-4565-9164-39C4925E467B");
-
-            return VideoDownloadHelper.SHGetKnownFolderPath(guid, 0, (IntPtr)0);
-        }
-
         public static async Task RetrieveVideoTitle(this VideoDownloadRequest request)
         {
             if (request != null)
@@ -34,6 +25,48 @@ namespace BarefootVideoHelper.Helpers
             }
         }
 
+        public static async Task ExecuteVideoDownload
+            (IEnumerable<VideoDownloadRequest> downloadRequests,
+            String outputFolderName,
+            Int32 selectedQualityIndex,
+            Boolean attemptToSkipSponsor)
+        {
+            StringBuilder sb = new StringBuilder();
+            VideoDownloadQuality videoDownloadQuality = (VideoDownloadQuality)selectedQualityIndex;
+
+            switch (videoDownloadQuality)
+            {
+                case VideoDownloadQuality.BestCompatibility:
+                    sb.Append($"-f \"bv[ext=mp4]+ba[ext=m4a]\"");
+                    break;
+                case VideoDownloadQuality.BestQuality:
+                    sb.Append($"-f \"bv+ba\"");
+                    break;
+                default:
+                    throw new NotSupportedException("Unsupported video download quality enumerable value.");
+            }
+
+            sb.Append($" --paths \"{outputFolderName}\"");
+
+            if (attemptToSkipSponsor)
+            {
+                sb.Append($" --sponsorblock-remove \"sponsor\"");
+            }
+
+            String arguments = sb.ToString();
+
+            foreach (VideoDownloadRequest request in downloadRequests)
+            {
+                using (RedirectedProcess process = new RedirectedProcess
+                    (ToolPaths.YTDLPPath, $"{arguments} {request.URL}"))
+                {
+                    App.LogViewModel.RedirectedProcess = process;
+
+                    await process.StartAsync();
+                }
+            }
+        }
+
         public static HashSet<String> SupportedURLDomains
             => new HashSet<String>()
             {
@@ -43,5 +76,11 @@ namespace BarefootVideoHelper.Helpers
 
         public static HttpClient HttpClient
             => new HttpClient();
+    }
+
+    public enum VideoDownloadQuality
+    {
+        BestCompatibility,
+        BestQuality
     }
 }
