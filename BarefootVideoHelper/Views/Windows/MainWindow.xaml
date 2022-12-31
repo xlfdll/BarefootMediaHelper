@@ -64,7 +64,7 @@
         </Style>
     </Window.Resources>
 
-    <TabControl TabStripPlacement="Left" metro:TabControlHelper.Underlined="TabPanel">
+    <TabControl TabStripPlacement="Top" metro:TabControlHelper.Underlined="TabPanel">
         <TabItem Header="Video Download">
             <local:VideoDownloadUserControl DataContext="{Binding Path=VideoDownloadViewModel}"/>
         </TabItem>
