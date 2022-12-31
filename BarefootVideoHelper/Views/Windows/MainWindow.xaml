@@ -11,7 +11,7 @@
         TitleCharacterCasing="Normal" GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
         WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
         metroDialogs:DialogParticipation.Register="{Binding}"
-        Width="720" SizeToContent="Height"
+        Width="900" SizeToContent="Height"
         Loaded="MainWindow_Loaded">
 
     <metro:MetroWindow.RightWindowCommands>
@@ -25,6 +25,9 @@
     </Window.TaskbarItemInfo>
 
     <Window.Resources>
+        <Style TargetType="TabControl" BasedOn="{StaticResource MahApps.Styles.TabControl.AnimatedSingleRow}">
+            <Setter Property="metro:HeaderedControlHelper.HeaderFontSize" Value="20"/>
+        </Style>
         <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -61,15 +64,18 @@
         </Style>
     </Window.Resources>
 
-    <TabControl metro:TabControlHelper.Underlined="TabPanel">
+    <TabControl TabStripPlacement="Top" metro:TabControlHelper.Underlined="TabPanel">
+        <TabItem Header="Video Download">
+            <local:VideoDownloadUserControl DataContext="{Binding Path=VideoDownloadViewModel}"/>
+        </TabItem>
         <TabItem Header="BB Composition">
             <local:BBCompositionUserControl DataContext="{Binding Path=BBCompositionViewModel}"/>
         </TabItem>
-        <TabItem Header="Subtitle Removal">
-            <local:SubtitleRemovalUserControl DataContext="{Binding Path=SubtitleRemovalViewModel}"/>
-        </TabItem>
         <TabItem Header="Format Conversion">
             <local:FormatConversionUserControl DataContext="{Binding Path=FormatConvertViewModel}"/>
+        </TabItem>
+        <TabItem Header="Subtitle Removal">
+            <local:SubtitleRemovalUserControl DataContext="{Binding Path=SubtitleRemovalViewModel}"/>
         </TabItem>
     </TabControl>
 </metro:MetroWindow>

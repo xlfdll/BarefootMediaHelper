@@ -16,5 +16,7 @@ namespace BarefootVideoHelper
             => Path.Combine(ToolPaths.ToolsPath, "avs4x26x.exe");
         public static String MP4BoxPath
             => Path.Combine(ToolPaths.ToolsPath, "mp4box.exe");
+        public static String YTDLPPath
+            => Path.Combine(ToolPaths.ToolsPath, "yt-dlp.exe");
     }
 }

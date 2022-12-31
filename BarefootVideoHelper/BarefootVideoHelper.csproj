@@ -56,8 +56,10 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -72,6 +74,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\Controls\Modules\VideoDownloadUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Controls\Modules\FormatConversionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -114,7 +120,19 @@
     <Compile Include="..\XDLibrary\Xlfdll.Windows.Presentation\RelayCommand.cs">
       <Link>Base\Windows\Presentation\RelayCommand.cs</Link>
     </Compile>
+    <Compile Include="..\XDLibrary\Xlfdll.Windows\API\UserShell.cs">
+      <Link>Base\Windows\Shell\UserShell.cs</Link>
+    </Compile>
+    <Compile Include="..\XDLibrary\Xlfdll.Windows\Environment\SpecialFolders.cs">
+      <Link>Base\Windows\Shell\SpecialFolders.cs</Link>
+    </Compile>
     <Compile Include="Helpers\FormatConvertHelper.cs" />
+    <Compile Include="Helpers\VideoDownloadHelper.cs" />
+    <Compile Include="Models\VideoDownloadRequest.cs" />
+    <Compile Include="ViewModels\Modules\VideoDownloadViewModel.cs" />
+    <Compile Include="Views\Controls\Modules\VideoDownloadUserControl.xaml.cs">
+      <DependentUpon>VideoDownloadUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Modules\FormatConversionViewModel.cs" />
     <Compile Include="Views\Controls\Modules\FormatConversionUserControl.xaml.cs">
       <DependentUpon>FormatConversionUserControl.xaml</DependentUpon>
