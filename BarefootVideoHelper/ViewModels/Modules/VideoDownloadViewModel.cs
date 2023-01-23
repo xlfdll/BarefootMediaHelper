@@ -102,7 +102,6 @@ namespace BarefootVideoHelper
                         }
 
                         this.NewInput();
-                        this.DownloadRequests.Clear();
 
                         this.MainViewModel.IsBusy = false;
                     }
