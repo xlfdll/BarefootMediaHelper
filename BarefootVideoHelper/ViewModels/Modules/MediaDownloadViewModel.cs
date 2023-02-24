@@ -170,6 +170,7 @@ namespace BarefootVideoHelper
                         && this.SelectedDownloadRequestIndex < this.DownloadRequests.Count)
                     {
                         this.DownloadRequests.RemoveAt(this.SelectedDownloadRequestIndex);
+                        this.DownloadRequestCards.RemoveAt(this.SelectedDownloadRequestIndex);
                     }
                 },
                 delegate
