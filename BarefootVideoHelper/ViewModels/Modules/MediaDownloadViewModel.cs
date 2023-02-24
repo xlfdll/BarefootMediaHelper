@@ -13,6 +13,7 @@ using Xlfdll.Windows.Presentation;
 
 using BarefootVideoHelper.Helpers;
 using System.Web.UI.WebControls;
+using System.Diagnostics;
 
 namespace BarefootVideoHelper
 {
@@ -217,8 +218,14 @@ namespace BarefootVideoHelper
 
                         await controller.CloseAsync();
 
-                        await this.MainViewModel.DialogCoordinator.ShowMessageAsync
-                            (this.MainViewModel, String.Empty, "Operation completed.");
+                        MessageDialogResult dialogResult = await this.MainViewModel.DialogCoordinator.ShowMessageAsync
+                            (this.MainViewModel, String.Empty, "Operation completed.\nDo you want to open download folder?",
+                            MessageDialogStyle.AffirmativeAndNegative);
+
+                        if (dialogResult == MessageDialogResult.Affirmative)
+                        {
+                            Process.Start(this.OutputFolderName);
+                        }
                     }
                     catch (Exception ex)
                     {
