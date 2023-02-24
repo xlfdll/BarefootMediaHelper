@@ -19,7 +19,7 @@ namespace BarefootVideoHelper.Properties {
     // または Visual Studio のようなツールを使用して自動生成されました。
     // メンバーを追加または削除するには、.ResX ファイルを編集して、/str オプションと共に
     // ResGen を実行し直すか、または VS プロジェクトをビルドし直します。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -61,7 +61,7 @@ namespace BarefootVideoHelper.Properties {
         }
         
         /// <summary>
-        ///   User interface is based on MahApps.Metro (https://github.com/MahApps/MahApps.Metro) library, which is licensed under MIT (https://github.com/MahApps/MahApps.Metro/blob/develop/LICENSE) license.
+        ///   User interface is based on MahApps.Metro library, which is licensed under MIT license.
         ///
         ///Hard-coded subtitle removal algorithm and associated files are from:
         ///https://forum.videohelp.com/threads/358181-How-to-remove-hard-coded-subtitles-HELP-PLEASE に類似しているローカライズされた文字列を検索します。
@@ -69,6 +69,16 @@ namespace BarefootVideoHelper.Properties {
         internal static string ExternalSources {
             get {
                 return ResourceManager.GetString("ExternalSources", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Byte[] のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static byte[] MediaDownloadSources {
+            get {
+                object obj = ResourceManager.GetObject("MediaDownloadSources", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }

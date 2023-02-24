@@ -65,8 +65,8 @@
     </Window.Resources>
 
     <TabControl TabStripPlacement="Top" metro:TabControlHelper.Underlined="TabPanel">
-        <TabItem Header="Video Download">
-            <local:VideoDownloadUserControl DataContext="{Binding Path=VideoDownloadViewModel}"/>
+        <TabItem Header="Media Download">
+            <local:MediaDownloadUserControl DataContext="{Binding Path=MediaDownloadViewModel}"/>
         </TabItem>
         <TabItem Header="BB Composition">
             <local:BBCompositionUserControl DataContext="{Binding Path=BBCompositionViewModel}"/>
