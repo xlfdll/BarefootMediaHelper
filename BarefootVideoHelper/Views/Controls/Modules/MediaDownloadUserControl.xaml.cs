@@ -3,11 +3,11 @@
 namespace BarefootVideoHelper
 {
     /// <summary>
-    /// VideoDownloadUserControl.xaml の相互作用ロジック
+    /// MediaDownloadUserControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class VideoDownloadUserControl : UserControl
+    public partial class MediaDownloadUserControl : UserControl
     {
-        public VideoDownloadUserControl()
+        public MediaDownloadUserControl()
         {
             InitializeComponent();
         }

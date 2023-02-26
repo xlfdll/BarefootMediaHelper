@@ -1,10 +1,9 @@
-﻿<UserControl x:Class="BarefootVideoHelper.VideoDownloadUserControl"
+﻿<UserControl x:Class="BarefootVideoHelper.MediaDownloadUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:local="clr-namespace:BarefootVideoHelper"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -24,25 +23,53 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="_URL"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
-                 Text="{Binding Path=VideoURL, UpdateSourceTrigger=PropertyChanged}"
+        <TextBox Grid.Row="0" Grid.Column="1"
+                 Text="{Binding Path=SourceURL, UpdateSourceTrigger=PropertyChanged}"
                  metro:TextBoxHelper.Watermark="Paste video URL here"/>
+        <Button Grid.Row="0" Grid.Column="2" Content="Paste"
+                Command="{Binding Path=PasteCommand}"/>
 
-        <Label Grid.Row="1" Grid.Column="0" Content="_Quality"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="_Format"/>
         <ComboBox Grid.Row="1" Grid.Column="1"
-                  SelectedIndex="{Binding Path=SelectedQualityIndex}">
-            <ComboBoxItem Content="Best Compatibility (Best MP4 Video + Best M4A Audio)"/>
-            <ComboBoxItem Content="Best Quality (Best Video Available + Best Audio Available)"/>
+                  ItemsSource="{Binding Path=Formats}"
+                  SelectedIndex="{Binding Path=SelectedFormatIndex}">
+            <ComboBox.Style>
+                <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=Formats}" Value="{x:Null}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Formats.Count}" Value="0">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+
+                    <!-- For some reason this style cannot inherit parent styles -->
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="FontSize" Value="16"/>
+                </Style>
+            </ComboBox.Style>
         </ComboBox>
         <Button Grid.Row="1" Grid.Column="2"
                 Content="_Add to Queue"
                 Command="{Binding Path=AddToQueueCommand}"/>
 
         <Label Grid.Row="2" Grid.Column="0" Content="Que_ue"/>
-        <ListBox Grid.Row="2" Grid.Column="1" Height="100"
-                 ItemsSource="{Binding Path=DownloadRequests}"
-                 SelectedIndex="{Binding Path=SelectedVideoDownloadRequestIndex}"
-                 DisplayMemberPath="DisplayText"/>
+        <ListBox Grid.Row="2" Grid.Column="1" Height="150"
+                 ItemsSource="{Binding Path=DownloadRequestCards}"
+                 SelectedIndex="{Binding Path=SelectedDownloadRequestIndex}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock Text="{Binding Path=Title}" FontWeight="Bold"/>
+                        <LineBreak/>
+                        [<TextBlock Text="{Binding Path=Source}"/>]
+                        <TextBlock Text="{Binding Path=Format}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <Button Grid.Row="2" Grid.Column="2"
                 Content="_Remove&#x0d;&#x0a;Selected"
                 Command="{Binding Path=RemoveSelectedCommand}"
@@ -56,7 +83,20 @@
 
         <metro:ToggleSwitch Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
                             Content="Attempt to Skip Sponsor Advertisements"
-                            IsOn="{Binding Path=DoesSkipSponsor}"/>
+                            IsOn="{Binding Path=DoesSkipSponsor}">
+            <metro:ToggleSwitch.Style>
+                <Style TargetType="metro:ToggleSwitch" BasedOn="{StaticResource {x:Type metro:ToggleSwitch}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=Formats}" Value="{x:Null}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=Formats.Count}" Value="0">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </metro:ToggleSwitch.Style>
+        </metro:ToggleSwitch>
 
         <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
@@ -84,7 +124,7 @@
                     </Style>
                 </TextBlock.Style>
             </TextBlock>
-            <Button Grid.Column="1" Content="Start Video Download"
+            <Button Grid.Column="1" Content="Start Download"
                     Command="{Binding Path=DownloadCommand}"
                     HorizontalAlignment="Right"/>
         </Grid>

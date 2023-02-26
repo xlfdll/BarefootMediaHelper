@@ -48,8 +48,12 @@
     <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.2.4.9\lib\net47\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -74,7 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\Controls\Modules\VideoDownloadUserControl.xaml">
+    <Page Include="Views\Controls\Modules\MediaDownloadUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -127,11 +131,12 @@
       <Link>Base\Windows\Shell\SpecialFolders.cs</Link>
     </Compile>
     <Compile Include="Helpers\FormatConvertHelper.cs" />
-    <Compile Include="Helpers\VideoDownloadHelper.cs" />
-    <Compile Include="Models\VideoDownloadRequest.cs" />
-    <Compile Include="ViewModels\Modules\VideoDownloadViewModel.cs" />
-    <Compile Include="Views\Controls\Modules\VideoDownloadUserControl.xaml.cs">
-      <DependentUpon>VideoDownloadUserControl.xaml</DependentUpon>
+    <Compile Include="Helpers\MediaDownloadHelper.cs" />
+    <Compile Include="Models\MediaDownloadRequest.cs" />
+    <Compile Include="Models\MediaDownloadSource.cs" />
+    <Compile Include="ViewModels\Modules\MediaDownloadViewModel.cs" />
+    <Compile Include="Views\Controls\Modules\MediaDownloadUserControl.xaml.cs">
+      <DependentUpon>MediaDownloadUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Modules\FormatConversionViewModel.cs" />
     <Compile Include="Views\Controls\Modules\FormatConversionUserControl.xaml.cs">
@@ -184,6 +189,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.manifest">
       <SubType>Designer</SubType>
@@ -193,6 +199,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\MediaDownloadSources.json" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Barefoot.ico" />

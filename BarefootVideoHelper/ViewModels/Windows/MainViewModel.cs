@@ -26,8 +26,8 @@ namespace BarefootVideoHelper
             => new SubtitleRemovalViewModel(this);
         public FormatConversionViewModel FormatConvertViewModel
             => new FormatConversionViewModel(this);
-        public VideoDownloadViewModel VideoDownloadViewModel
-            => new VideoDownloadViewModel(this);
+        public MediaDownloadViewModel MediaDownloadViewModel
+            => new MediaDownloadViewModel(this);
         public LogViewModel LogViewModel
             => new LogViewModel(this);
 

@@ -1,0 +1,33 @@
+[
+  {
+    "Name": "YouTube",
+    "Type": "Video",
+    "Domains": [
+      "youtube.com",
+      "youtu.be"
+    ],
+    "FormatNames": [
+      "Best Compatibility (Best MP4 Video + Best M4A Audio)",
+      "Best Quality (Best Video Available + Best Audio Available)",
+      "Audio Only (M4A)"
+    ],
+    "FormatParameters": [
+      "bv[ext=mp4]+ba[ext=m4a]",
+      "bv+ba",
+      "ba[ext=m4a]"
+    ]
+  },
+  {
+    "Name": "SoundCloud",
+    "Type": "Audio",
+    "Domains": [
+      "soundcloud.com"
+    ],
+    "FormatNames": [
+      "Best Audio (MP3)"
+    ],
+    "FormatParameters": [
+      "ba[ext=mp3]"
+    ]
+  }
+]
