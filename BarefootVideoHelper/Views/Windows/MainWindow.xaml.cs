@@ -3,7 +3,7 @@ using System.Windows;
 
 using MahApps.Metro.Controls.Dialogs;
 
-namespace BarefootVideoHelper
+namespace BarefootMediaHelper
 {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック

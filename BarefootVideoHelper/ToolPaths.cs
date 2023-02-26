@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace BarefootVideoHelper
+namespace BarefootMediaHelper
 {
     public static class ToolPaths
     {

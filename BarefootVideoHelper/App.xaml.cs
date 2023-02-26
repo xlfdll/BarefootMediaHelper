@@ -4,7 +4,7 @@ using System.Windows.Threading;
 
 using ControlzEx.Theming;
 
-namespace BarefootVideoHelper
+namespace BarefootMediaHelper
 {
     /// <summary>
     /// App.xaml の相互作用ロジック

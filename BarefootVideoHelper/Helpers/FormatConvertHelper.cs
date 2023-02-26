@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 using Xlfdll.Diagnostics;
 
-namespace BarefootVideoHelper
+namespace BarefootMediaHelper
 {
     public static class FormatConvertHelper
     {

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace BarefootVideoHelper
+namespace BarefootMediaHelper
 {
     /// <summary>
     /// LogWindow.xaml の相互作用ロジック

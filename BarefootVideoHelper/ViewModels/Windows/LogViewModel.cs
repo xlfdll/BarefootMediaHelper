@@ -5,7 +5,7 @@ using System.Threading;
 using Xlfdll.Diagnostics;
 using Xlfdll.Windows.Presentation;
 
-namespace BarefootVideoHelper
+namespace BarefootMediaHelper
 {
     public class LogViewModel : ViewModelBase
     {
@@ -96,7 +96,7 @@ namespace BarefootVideoHelper
         private void RedirectedProcess_DataReceived(object sender, DataReceivedEventArgs e)
         {
             // Create mutex object with a name on the fly, so that different threads get the same one for use
-            Mutex mutex = new Mutex(false, "BarefootVideoHelper_LogMutex");
+            Mutex mutex = new Mutex(false, "BarefootMediaHelper_LogMutex");
 
             if (mutex.WaitOne())
             {

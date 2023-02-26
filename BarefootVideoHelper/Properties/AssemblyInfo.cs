@@ -7,11 +7,11 @@ using Xlfdll;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("Barefoot Video Helper")]
+[assembly: AssemblyTitle("Barefoot Media Helper")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Xlfdll Workstation")]
-[assembly: AssemblyProduct("Barefoot Video Helper")]
+[assembly: AssemblyProduct("Barefoot Media Helper")]
 [assembly: AssemblyCopyright("© 2018-2023 Xlfdll Workstation")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

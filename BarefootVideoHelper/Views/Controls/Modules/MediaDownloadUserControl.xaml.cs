@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace BarefootVideoHelper
+namespace BarefootMediaHelper
 {
     /// <summary>
     /// MediaDownloadUserControl.xaml の相互作用ロジック

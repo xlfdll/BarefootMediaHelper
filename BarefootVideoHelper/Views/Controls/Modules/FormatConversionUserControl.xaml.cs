@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace BarefootVideoHelper
+namespace BarefootMediaHelper
 {
     /// <summary>
     /// FLV2MP4FormatUserControl.xaml の相互作用ロジック
