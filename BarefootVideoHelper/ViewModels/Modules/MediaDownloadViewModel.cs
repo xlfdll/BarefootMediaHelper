@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
 using System.Windows;
@@ -8,12 +9,9 @@ using WinForms = System.Windows.Forms;
 
 using MahApps.Metro.Controls.Dialogs;
 
-using Xlfdll.Windows;
 using Xlfdll.Windows.Presentation;
 
 using BarefootMediaHelper.Helpers;
-using System.Web.UI.WebControls;
-using System.Diagnostics;
 
 namespace BarefootMediaHelper
 {
@@ -26,7 +24,7 @@ namespace BarefootMediaHelper
             this.DownloadRequests = new ObservableCollection<MediaDownloadRequest>();
             this.DownloadRequestCards = new ObservableCollection<dynamic>();
 
-            this.OutputFolderName = UserFolders.Downloads;
+            this.OutputFolderName = App.Settings.DownloadOutputFolderPath;
         }
 
         public MainViewModel MainViewModel { get; }
@@ -195,6 +193,9 @@ namespace BarefootMediaHelper
                         if (dlg.ShowDialog() == WinForms.DialogResult.OK)
                         {
                             this.OutputFolderName = dlg.SelectedPath;
+
+                            App.Settings.DownloadOutputFolderPath = dlg.SelectedPath;
+                            App.Settings.Save();
                         }
                     }
                 }

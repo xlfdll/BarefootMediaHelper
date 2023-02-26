@@ -118,6 +118,9 @@
     <Compile Include="..\XDLibrary\Xlfdll.Core\Infrastructure\ObservableObject.cs">
       <Link>Base\ObservableObject.cs</Link>
     </Compile>
+    <Compile Include="..\XDLibrary\Xlfdll.Core\Infrastructure\Text\AdditionalEncodings.cs">
+      <Link>Base\AdditionalEncodings.cs</Link>
+    </Compile>
     <Compile Include="..\XDLibrary\Xlfdll.Windows.Presentation\ApplicationPackUri.cs">
       <Link>Base\Windows\Presentation\ApplicationPackUri.cs</Link>
     </Compile>
@@ -130,6 +133,7 @@
     <Compile Include="..\XDLibrary\Xlfdll.Windows\Environment\SpecialFolders.cs">
       <Link>Base\Windows\Shell\SpecialFolders.cs</Link>
     </Compile>
+    <Compile Include="Facilities\AppSettings.cs" />
     <Compile Include="Helpers\FormatConvertHelper.cs" />
     <Compile Include="Helpers\MediaDownloadHelper.cs" />
     <Compile Include="Models\MediaDownloadRequest.cs" />
