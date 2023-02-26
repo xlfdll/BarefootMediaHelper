@@ -61,6 +61,15 @@ namespace BarefootMediaHelper.Properties {
         }
         
         /// <summary>
+        ///   config.json に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string AppSettingsFileName {
+            get {
+                return ResourceManager.GetString("AppSettingsFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   User interface is based on MahApps.Metro library, which is licensed under MIT license.
         ///
         ///Hard-coded subtitle removal algorithm and associated files are from:
