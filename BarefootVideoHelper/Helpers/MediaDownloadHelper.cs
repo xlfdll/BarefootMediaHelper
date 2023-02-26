@@ -10,9 +10,9 @@ using Newtonsoft.Json;
 
 using Xlfdll.Diagnostics;
 
-using BarefootVideoHelper.Properties;
+using BarefootMediaHelper.Properties;
 
-namespace BarefootVideoHelper.Helpers
+namespace BarefootMediaHelper.Helpers
 {
     public static class MediaDownloadHelper
     {

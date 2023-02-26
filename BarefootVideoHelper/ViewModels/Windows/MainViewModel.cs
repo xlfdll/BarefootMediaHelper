@@ -7,9 +7,9 @@ using Xlfdll.Diagnostics;
 using Xlfdll.Windows.Presentation;
 using Xlfdll.Windows.Presentation.Dialogs;
 
-using BarefootVideoHelper.Properties;
+using BarefootMediaHelper.Properties;
 
-namespace BarefootVideoHelper
+namespace BarefootMediaHelper
 {
     public class MainViewModel : ViewModelBase
     {

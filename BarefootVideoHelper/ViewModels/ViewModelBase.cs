@@ -1,6 +1,6 @@
 ﻿using Xlfdll;
 
-namespace BarefootVideoHelper
+namespace BarefootMediaHelper
 {
     public abstract class ViewModelBase : ObservableObject { }
 }

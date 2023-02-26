@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BarefootVideoHelper
+namespace BarefootMediaHelper
 {
     public class SubtitleParameters
     {

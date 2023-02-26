@@ -10,7 +10,7 @@ using MahApps.Metro.Controls.Dialogs;
 
 using Xlfdll.Windows.Presentation;
 
-namespace BarefootVideoHelper
+namespace BarefootMediaHelper
 {
     public class SubtitleRemovalViewModel : ViewModelBase
     {

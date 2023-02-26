@@ -11,11 +11,11 @@ using MahApps.Metro.Controls.Dialogs;
 using Xlfdll.Windows;
 using Xlfdll.Windows.Presentation;
 
-using BarefootVideoHelper.Helpers;
+using BarefootMediaHelper.Helpers;
 using System.Web.UI.WebControls;
 using System.Diagnostics;
 
-namespace BarefootVideoHelper
+namespace BarefootMediaHelper
 {
     public class MediaDownloadViewModel : ViewModelBase
     {

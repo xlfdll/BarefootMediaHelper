@@ -1,5 +1,5 @@
-# Barefoot Video Helper
-A video processing utility / frontend used by Barefoot Invader team
+# Barefoot Media Helper
+A media processing utility / frontend used by Barefoot Invader team
 
 Made for [Barefoot Invader (素足星侵略者)](https://space.bilibili.com/259213)
 

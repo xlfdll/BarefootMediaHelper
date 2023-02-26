@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using Xlfdll.Diagnostics;
 
-namespace BarefootVideoHelper
+namespace BarefootMediaHelper
 {
     public enum ConversionMode { HD, HD60fps, SD }
 
