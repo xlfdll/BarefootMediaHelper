@@ -26,7 +26,7 @@
         <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" IsReadOnly="True"
                  Text="{Binding Path=SourceFileName, Mode=OneWay}"
                  metro:TextBoxHelper.Watermark="Drag and drop, or browse a source video file here"
-                 AllowDrop="True" PreviewDragOver="SourceVideoFileNameTextBox_PreviewDragOver" Drop="SourceVideoFileNameTextBox_Drop"/>
+                 AllowDrop="True" PreviewDragOver="SourceFileNameTextBox_PreviewDragOver" Drop="SourceFileNameTextBox_Drop"/>
         <Button Grid.Row="0" Grid.Column="4" Content="_Browse..."
                 Command="{Binding Path=BrowseSourceFileCommand}"/>
 

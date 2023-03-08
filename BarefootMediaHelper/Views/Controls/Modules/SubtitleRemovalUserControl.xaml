@@ -31,11 +31,11 @@
 
         <Label Grid.Row="1" Grid.Column="0" Content="_Source"/>
         <TextBox Grid.Row="1" Grid.Column="1" IsReadOnly="True"
-                 Text="{Binding Path=SourceVideoFileName, Mode=OneWay}"
+                 Text="{Binding Path=SourceFileName, Mode=OneWay}"
                  metro:TextBoxHelper.Watermark="Drag and drop, or browse a source video file here"
-                 AllowDrop="True" PreviewDragOver="SourceVideoFileNameTextBox_PreviewDragOver" Drop="SourceVideoFileNameTextBox_Drop"/>
+                 AllowDrop="True" PreviewDragOver="SourceFileNameTextBox_PreviewDragOver" Drop="SourceFileNameTextBox_Drop"/>
         <Button Grid.Row="1" Grid.Column="2" Content="_Browse..."
-                Command="{Binding Path=BrowseSourceVideoFileCommand}"/>
+                Command="{Binding Path=BrowseSourceFileCommand}"/>
 
         <Label Grid.Row="2" Grid.Column="0" Content="_Output"/>
         <TextBox Grid.Row="2" Grid.Column="1" IsReadOnly="True"
