@@ -16,7 +16,7 @@ namespace BarefootMediaHelper
             InitializeComponent();
         }
 
-        private void SourceVideoFileNameTextBox_PreviewDragOver(object sender, DragEventArgs e)
+        private void SourceFileNameTextBox_PreviewDragOver(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -25,7 +25,7 @@ namespace BarefootMediaHelper
             }
         }
 
-        private void SourceVideoFileNameTextBox_Drop(object sender, DragEventArgs e)
+        private void SourceFileNameTextBox_Drop(object sender, DragEventArgs e)
         {
             String[] files = e.Data.GetData(DataFormats.FileDrop) as String[];
             String[] supportedExtensions = new String[] { ".mp4", ".flv", ".mkv", ".avi" };
@@ -36,7 +36,7 @@ namespace BarefootMediaHelper
 
                 if (viewModel != null)
                 {
-                    viewModel.SourceVideoFileName = files[0];
+                    viewModel.SourceFileName = files[0];
                 }
             }
         }

@@ -28,7 +28,7 @@ namespace BarefootMediaHelper
         public MainViewModel MainViewModel { get; }
 
         private Int32 _selectedModeIndex;
-        private String _sourceVideoFileName;
+        private String _sourceFileName;
         private String _outputFileName;
 
         private Int32 _newSubtitleTopLeftX;
@@ -46,19 +46,19 @@ namespace BarefootMediaHelper
             set => SetField(ref _selectedModeIndex, value);
         }
 
-        public String SourceVideoFileName
+        public String SourceFileName
         {
             get
             {
-                return _sourceVideoFileName;
+                return _sourceFileName;
             }
             set
             {
-                SetField(ref _sourceVideoFileName, value);
+                SetField(ref _sourceFileName, value);
 
-                String extension = Path.GetExtension(_sourceVideoFileName);
+                String extension = Path.GetExtension(_sourceFileName);
 
-                this.OutputFileName = _sourceVideoFileName.Replace(extension, String.Empty) + "-OUTPUT" + ".mp4";
+                this.OutputFileName = _sourceFileName.Replace(extension, String.Empty) + "-OUTPUT" + ".mp4";
 
                 // Force re-evaluate CanExecute on all commands
                 // Enable the Start button immediately
@@ -122,7 +122,7 @@ namespace BarefootMediaHelper
 
         public ObservableCollection<SubtitleParameters> SubtitleParameters { get; }
 
-        public RelayCommand<Object> BrowseSourceVideoFileCommand
+        public RelayCommand<Object> BrowseSourceFileCommand
             => new RelayCommand<Object>
             (
                 delegate
@@ -130,15 +130,15 @@ namespace BarefootMediaHelper
                     OpenFileDialog dialog = new OpenFileDialog()
                     {
                         Filter = "Supported Formats (*.mp4;*.flv;*.mkv;*.avi)|*.mp4;*.flv;*.mkv;*.avi|All Files (*.*)|*.*",
-                        InitialDirectory = String.IsNullOrEmpty(this.SourceVideoFileName)
+                        InitialDirectory = String.IsNullOrEmpty(this.SourceFileName)
                             ? Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
                             : String.Empty,
-                        FileName = this.SourceVideoFileName
+                        FileName = this.SourceFileName
                     };
 
                     if (dialog.ShowDialog() == true)
                     {
-                        this.SourceVideoFileName = dialog.FileName;
+                        this.SourceFileName = dialog.FileName;
                     }
                 }
             );
@@ -222,9 +222,9 @@ namespace BarefootMediaHelper
 
                     try
                     {
-                        if (!File.Exists(this.SourceVideoFileName))
+                        if (!File.Exists(this.SourceFileName))
                         {
-                            throw new FileNotFoundException($"File not found: {this.SourceVideoFileName}");
+                            throw new FileNotFoundException($"File not found: {this.SourceFileName}");
                         }
 
                         SubtitleRemovalMode mode = (SubtitleRemovalMode)this.SelectedModeIndex;
@@ -233,13 +233,13 @@ namespace BarefootMediaHelper
                         {
                             case SubtitleRemovalMode.Soft:
                                 await SubtitleRemovalHelper.ExecuteSoftRemoval
-                                    (this.SourceVideoFileName,
+                                    (this.SourceFileName,
                                     this.OutputFileName);
 
                                 break;
                             case SubtitleRemovalMode.Hard:
                                 await SubtitleRemovalHelper.ExecuteHardRemoval
-                                        (this.SourceVideoFileName,
+                                        (this.SourceFileName,
                                         this.OutputFileName,
                                         this.SubtitleParameters);
 
@@ -264,7 +264,7 @@ namespace BarefootMediaHelper
                 },
                 delegate
                 {
-                    Boolean isEnabled = !String.IsNullOrEmpty(this.SourceVideoFileName) && !String.IsNullOrEmpty(this.OutputFileName);
+                    Boolean isEnabled = !String.IsNullOrEmpty(this.SourceFileName) && !String.IsNullOrEmpty(this.OutputFileName);
 
                     SubtitleRemovalMode mode = (SubtitleRemovalMode)this.SelectedModeIndex;
 
