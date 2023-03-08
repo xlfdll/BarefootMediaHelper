@@ -20,14 +20,16 @@ namespace BarefootMediaHelper
 
         public IDialogCoordinator DialogCoordinator { get; }
 
+        public MediaDownloadViewModel MediaDownloadViewModel
+            => new MediaDownloadViewModel(this);
         public BBCompositionViewModel BBCompositionViewModel
             => new BBCompositionViewModel(this);
         public SubtitleRemovalViewModel SubtitleRemovalViewModel
             => new SubtitleRemovalViewModel(this);
         public FormatConversionViewModel FormatConvertViewModel
             => new FormatConversionViewModel(this);
-        public MediaDownloadViewModel MediaDownloadViewModel
-            => new MediaDownloadViewModel(this);
+        public AudioExtractionViewModel AudioExtractionViewModel
+            => new AudioExtractionViewModel(this);
         public LogViewModel LogViewModel
             => new LogViewModel(this);
 

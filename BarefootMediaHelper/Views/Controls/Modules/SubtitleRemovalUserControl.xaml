@@ -29,7 +29,7 @@
             <ComboBoxItem Content="Hard-coded"/>
         </ComboBox>
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Source _Video"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="_Source"/>
         <TextBox Grid.Row="1" Grid.Column="1" IsReadOnly="True"
                  Text="{Binding Path=SourceVideoFileName, Mode=OneWay}"
                  metro:TextBoxHelper.Watermark="Drag and drop, or browse a source video file here"

@@ -73,6 +73,9 @@ namespace BarefootMediaHelper
                 {
                     OpenFileDialog dialog = new OpenFileDialog()
                     {
+                        InitialDirectory = String.IsNullOrEmpty(this.SourceFileName)
+                            ? Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+                            : String.Empty,
                         FileName = this.SourceFileName
                     };
 
@@ -102,6 +105,9 @@ namespace BarefootMediaHelper
                 {
                     SaveFileDialog dialog = new SaveFileDialog()
                     {
+                        InitialDirectory = String.IsNullOrEmpty(this.OutputFileName)
+                            ? Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+                            : String.Empty,
                         FileName = this.OutputFileName
                     };
 
@@ -143,7 +149,7 @@ namespace BarefootMediaHelper
                             throw new FileNotFoundException($"File not found: {this.SourceFileName}");
                         }
 
-                        await FormatConvertHelper.ExecuteFormatConversion
+                        await FormatConversionHelper.ExecuteFormatConversion
                             (this.SourceFileName,
                             this.OutputFileName,
                             true);

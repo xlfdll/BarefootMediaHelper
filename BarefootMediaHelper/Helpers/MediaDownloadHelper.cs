@@ -59,14 +59,13 @@ namespace BarefootMediaHelper.Helpers
             (String outputFolderName,
             IEnumerable<MediaDownloadRequest> downloadRequests)
         {
-            StringBuilder sb = new StringBuilder();
-
-            sb.Append($" --paths \"{outputFolderName}\"");
-
             foreach (MediaDownloadRequest request in downloadRequests)
             {
                 MediaDownloadSource source = MediaDownloadHelper.GetDownloadSource(request.URL);
 
+                StringBuilder sb = new StringBuilder();
+
+                sb.Append($" --paths \"{outputFolderName}\"");
                 sb.Append($" -f \"{source.FormatParameters[request.FormatIndex]}\"");
 
                 if (request.SkipSponsor)

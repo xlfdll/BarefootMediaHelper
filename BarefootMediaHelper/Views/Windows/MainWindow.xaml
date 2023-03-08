@@ -77,5 +77,8 @@
         <TabItem Header="Subtitle Removal">
             <local:SubtitleRemovalUserControl DataContext="{Binding Path=SubtitleRemovalViewModel}"/>
         </TabItem>
+        <TabItem Header="Audio Extraction">
+            <local:AudioExtractionUserControl DataContext="{Binding Path=AudioExtractionViewModel}"/>
+        </TabItem>
     </TabControl>
 </metro:MetroWindow>

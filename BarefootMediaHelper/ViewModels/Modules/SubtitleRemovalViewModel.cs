@@ -130,6 +130,9 @@ namespace BarefootMediaHelper
                     OpenFileDialog dialog = new OpenFileDialog()
                     {
                         Filter = "Supported Formats (*.mp4;*.flv;*.mkv;*.avi)|*.mp4;*.flv;*.mkv;*.avi|All Files (*.*)|*.*",
+                        InitialDirectory = String.IsNullOrEmpty(this.SourceVideoFileName)
+                            ? Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+                            : String.Empty,
                         FileName = this.SourceVideoFileName
                     };
 
@@ -148,6 +151,9 @@ namespace BarefootMediaHelper
                     SaveFileDialog dialog = new SaveFileDialog()
                     {
                         Filter = "MPEG-4 Part 14 (*.mp4)|*.mp4|Flash Video (*.flv)|*.flv|All Files (*.*)|*.*",
+                        InitialDirectory = String.IsNullOrEmpty(this.OutputFileName)
+                            ? Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+                            : String.Empty,
                         FileName = this.OutputFileName
                     };
 
