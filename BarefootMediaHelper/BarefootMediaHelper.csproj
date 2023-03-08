@@ -78,6 +78,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\Controls\Modules\AudioExtractionUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Controls\Modules\MediaDownloadUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,8 +137,13 @@
     <Compile Include="..\XDLibrary\Xlfdll.Windows\Environment\SpecialFolders.cs">
       <Link>Base\Windows\Shell\SpecialFolders.cs</Link>
     </Compile>
+    <Compile Include="Helpers\AudioExtractionHelper.cs" />
+    <Compile Include="ViewModels\Modules\AudioExtractionViewModel.cs" />
+    <Compile Include="Views\Controls\Modules\AudioExtractionUserControl.xaml.cs">
+      <DependentUpon>AudioExtractionUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Facilities\AppSettings.cs" />
-    <Compile Include="Helpers\FormatConvertHelper.cs" />
+    <Compile Include="Helpers\FormatConversionHelper.cs" />
     <Compile Include="Helpers\MediaDownloadHelper.cs" />
     <Compile Include="Models\MediaDownloadRequest.cs" />
     <Compile Include="Models\MediaDownloadSource.cs" />
