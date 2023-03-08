@@ -43,7 +43,7 @@ namespace BarefootMediaHelper
                 String outputFileName = Path.Combine(outputFolderName,
                     $"{Path.GetFileNameWithoutExtension(sourceFileName)}_Audio_{i}.wav");
 
-                String arguments = $"-i \"{sourceFileName}\" -f wav -vn \"{outputFileName}\"";
+                String arguments = $"-i \"{sourceFileName}\" -map 0:a:{i} -f wav -vn \"{outputFileName}\"";
 
                 using (RedirectedProcess process = new RedirectedProcess(ToolPaths.FFMPEGPath, arguments))
                 {
