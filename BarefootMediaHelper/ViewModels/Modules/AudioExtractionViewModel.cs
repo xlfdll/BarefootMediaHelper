@@ -112,9 +112,9 @@ namespace BarefootMediaHelper
                         await this.MainViewModel.DialogCoordinator.ShowMessageAsync
                             (this.MainViewModel, String.Empty, "Operation completed.");
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        MessageBox.Show(App.Current.MainWindow, "No audio track found.",
+                        MessageBox.Show(App.Current.MainWindow, ex.Message,
                             App.Current.MainWindow.Title, MessageBoxButton.OK, MessageBoxImage.Error);
 
                         await controller.CloseAsync();
