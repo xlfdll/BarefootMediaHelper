@@ -23,14 +23,19 @@ namespace BarefootMediaHelper
                 process.BaseProcess.Start();
                 process.BaseProcess.WaitForExit();
 
-                String output = process.BaseProcess.StandardOutput.ReadToEnd();
+                String output = process.BaseProcess.StandardOutput.ReadLine();
 
-                audioTrackCount = Int32.Parse(output);
+                while (!String.IsNullOrEmpty(output))
+                {
+                    audioTrackCount = Int32.Parse(output);
+
+                    output = process.BaseProcess.StandardOutput.ReadLine();
+                }
             }
 
             if (audioTrackCount == 0)
             {
-                throw new OperationCanceledException("No audio streams");
+                throw new OperationCanceledException("No audio track found.");
             }
 
             for (Int32 i = 0; i < audioTrackCount; i++)
