@@ -8,6 +8,13 @@ Made for [Barefoot Invader (素足星侵略者)](https://space.bilibili.com/2592
        alt="Barefoot Video Helper" width="1024">
 </p>
 
+### Features
+* Media Download (YouTube / SoundCloud)
+* Composition for BB
+* Format Conversion (FLV => MP4)
+* Subtitle Removal (both soft/embedded and hard-coded)
+* Audio Extraction from videos
+
 ## System Requirements
 * .NET Framework 4.8
 
