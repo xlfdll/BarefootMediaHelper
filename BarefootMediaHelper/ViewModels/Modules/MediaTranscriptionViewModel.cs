@@ -67,7 +67,7 @@ namespace BarefootMediaHelper
                             ? Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
                             : String.Empty,
                         FileName = this.SourceFileName,
-                        Filter = "Media Files (.mp4;.flv;.mkv;.avi;*.wav;*.mp3;*.m4a)|.mp4;.flv;.mkv;.avi;*.wav;*.mp3;*.m4a|All Files (*.*)|*.*"
+                        Filter = "Media Files (*.mp4;*.flv;*.mkv;*.avi;*.wav;*.mp3;*.m4a)|*.mp4;*.flv;*.mkv;*.avi;*.wav;*.mp3;*.m4a|All Files (*.*)|*.*"
                     };
 
                     if (dialog.ShowDialog() == true)
