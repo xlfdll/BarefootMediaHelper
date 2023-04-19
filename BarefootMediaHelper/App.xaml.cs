@@ -28,8 +28,8 @@ namespace BarefootMediaHelper
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            // Ignore exceptions raised by MetroWindow when exiting
-            if (e.Exception.Source == "PresentationCore")
+            // BUG: Ignore exceptions raised by MetroWindow when exiting
+            if (e.Exception.Source == "PresentationCore" || e.Exception.Source == "ControlzEx")
             {
                 e.Handled = true;
             }

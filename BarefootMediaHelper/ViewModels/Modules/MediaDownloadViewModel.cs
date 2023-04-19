@@ -12,6 +12,7 @@ using MahApps.Metro.Controls.Dialogs;
 using Xlfdll.Windows.Presentation;
 
 using BarefootMediaHelper.Helpers;
+using System.Windows.Input;
 
 namespace BarefootMediaHelper
 {
@@ -149,6 +150,10 @@ namespace BarefootMediaHelper
                     this.SourceURL = String.Empty;
 
                     this.MainViewModel.IsBusy = false;
+
+                    // Force re-evaluate CanExecute on all commands
+                    // Enable the Start button immediately
+                    CommandManager.InvalidateRequerySuggested();
                 },
                 delegate
                 {
