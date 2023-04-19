@@ -77,7 +77,7 @@
 
         <Label Grid.Row="3" Grid.Column="0" Content="Output"/>
         <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True"
-                 Text="{Binding Path=OutputFolderName}"/>
+                 Text="{Binding Path=OutputFolderName, Mode=OneWay}"/>
         <Button Grid.Row="3" Grid.Column="2" Content="_Save To..."
                 Command="{Binding Path=BrowseOutputFolderCommand}"/>
 

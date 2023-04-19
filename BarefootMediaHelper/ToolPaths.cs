@@ -18,5 +18,8 @@ namespace BarefootMediaHelper
             => Path.Combine(ToolPaths.ToolsPath, "mp4box.exe");
         public static String YTDLPPath
             => Path.Combine(ToolPaths.ToolsPath, "yt-dlp.exe");
+
+        public static String BarefootTranscriberPath
+            => Path.Combine(ToolPaths.ToolsPath, @"xlfdll\BarefootMediaTranscriber.exe");
     }
 }

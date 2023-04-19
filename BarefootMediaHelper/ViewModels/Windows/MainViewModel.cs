@@ -22,6 +22,8 @@ namespace BarefootMediaHelper
 
         public MediaDownloadViewModel MediaDownloadViewModel
             => new MediaDownloadViewModel(this);
+        public MediaTranscriptionViewModel MediaTranscriptionViewModel
+            => new MediaTranscriptionViewModel(this);
         public BBCompositionViewModel BBCompositionViewModel
             => new BBCompositionViewModel(this);
         public SubtitleRemovalViewModel SubtitleRemovalViewModel

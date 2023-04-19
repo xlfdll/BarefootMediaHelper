@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="BarefootMediaHelper.MediaTranscriptionUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:local="clr-namespace:BarefootMediaHelper"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Source _Media"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" IsReadOnly="True"
+                 Text="{Binding Path=SourceFileName, Mode=OneWay}"
+                 metro:TextBoxHelper.Watermark="Drag and drop, or browse a source media file here"
+                 AllowDrop="True" PreviewDragOver="SourceFileNameTextBox_PreviewDragOver" Drop="SourceMediaFileNameTextBox_Drop"/>
+        <Button Grid.Row="0" Grid.Column="3" Content="_Browse..."
+                Command="{Binding Path=BrowseSourceFileCommand}"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="_Output Subtitle"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" IsReadOnly="True"
+                 Text="{Binding Path=OutputFileName, Mode=OneWay}"/>
+        <Button Grid.Row="1" Grid.Column="3" Content="Save _To..."
+                Command="{Binding Path=BrowseOutputFileCommand}"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Mo_del"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" SelectedIndex="{Binding Path=SelectedModelIndex}">
+            <ComboBoxItem Content="Default"/>
+            <ComboBoxItem Content="Tiny (English)"/>
+            <ComboBoxItem Content="Tiny (Multilingual)"/>
+            <ComboBoxItem Content="Base (English)"/>
+            <ComboBoxItem Content="Base (Multilingual)"/>
+            <ComboBoxItem Content="Small (English)"/>
+            <ComboBoxItem Content="Small (Multilingual)"/>
+            <ComboBoxItem Content="Medium (English)"/>
+            <ComboBoxItem Content="Medium (Multilingual)"/>
+            <ComboBoxItem Content="Large"/>
+        </ComboBox>
+
+        <Button Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Right"
+                Content="_Start Transcription"
+                Command="{Binding Path=StartCommand}"/>
+    </Grid>
+</UserControl>

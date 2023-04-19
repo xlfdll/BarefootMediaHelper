@@ -68,6 +68,9 @@
         <TabItem Header="Media Download">
             <local:MediaDownloadUserControl DataContext="{Binding Path=MediaDownloadViewModel}"/>
         </TabItem>
+        <TabItem Header="Media Transcription">
+            <local:MediaTranscriptionUserControl DataContext="{Binding Path=MediaTranscriptionViewModel}"/>
+        </TabItem>
         <TabItem Header="BB Composition">
             <local:BBCompositionUserControl DataContext="{Binding Path=BBCompositionViewModel}"/>
         </TabItem>

@@ -53,7 +53,7 @@
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.19\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -78,6 +78,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\Controls\Modules\MediaTranscriptionUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Controls\Modules\AudioExtractionUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -138,6 +142,11 @@
       <Link>Base\Windows\Shell\SpecialFolders.cs</Link>
     </Compile>
     <Compile Include="Helpers\AudioExtractionHelper.cs" />
+    <Compile Include="Helpers\MediaTranscriptionHelper.cs" />
+    <Compile Include="ViewModels\Modules\MediaTranscriptionViewModel.cs" />
+    <Compile Include="Views\Controls\Modules\MediaTranscriptionUserControl.xaml.cs">
+      <DependentUpon>MediaTranscriptionUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Modules\AudioExtractionViewModel.cs" />
     <Compile Include="Views\Controls\Modules\AudioExtractionUserControl.xaml.cs">
       <DependentUpon>AudioExtractionUserControl.xaml</DependentUpon>
