@@ -72,6 +72,7 @@ namespace BarefootMediaHelper.Helpers
                 {
                     sb.Append($" --sponsorblock-remove \"sponsor\"");
                 }
+                sb.Append(request.NoPlaylist ? " --no-playlist" : " --yes-playlist");
 
                 String arguments = sb.ToString();
 
