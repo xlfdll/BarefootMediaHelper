@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid>
+    <Grid Grid.IsSharedSizeScope="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -19,7 +19,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" SharedSizeGroup="Buttons"/>
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="_URL"/>
@@ -55,8 +55,50 @@
                 Content="_Add to Queue"
                 Command="{Binding Path=AddToQueueCommand}"/>
 
-        <Label Grid.Row="2" Grid.Column="0" Content="Que_ue"/>
-        <ListBox Grid.Row="2" Grid.Column="1" Height="150"
+        <Label Grid.Row="2" Grid.Column="0" Content="_Options"/>
+        <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
+                    Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="metro:ToggleSwitch">
+                    <Setter Property="Margin" Value="5,5,10,5"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <metro:ToggleSwitch Content="Download Video Only (Not Playlist)"
+                                IsOn="{Binding Path=NoPlaylist}">
+                <metro:ToggleSwitch.Style>
+                    <Style TargetType="metro:ToggleSwitch" BasedOn="{StaticResource {x:Type metro:ToggleSwitch}}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=Formats}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=Formats.Count}" Value="0">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </metro:ToggleSwitch.Style>
+            </metro:ToggleSwitch>
+
+            <metro:ToggleSwitch Content="Attempt to Skip Sponsor Advertisements"
+                                IsOn="{Binding Path=SkipSponsor}">
+                <metro:ToggleSwitch.Style>
+                    <Style TargetType="metro:ToggleSwitch" BasedOn="{StaticResource {x:Type metro:ToggleSwitch}}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=Formats}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=Formats.Count}" Value="0">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </metro:ToggleSwitch.Style>
+            </metro:ToggleSwitch>
+        </StackPanel>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Que_ue"/>
+        <ListBox Grid.Row="3" Grid.Column="1" Height="150"
                  ItemsSource="{Binding Path=DownloadRequestCards}"
                  SelectedIndex="{Binding Path=SelectedDownloadRequestIndex}">
             <ListBox.ItemTemplate>
@@ -70,38 +112,21 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Grid.Row="2" Grid.Column="2"
+        <Button Grid.Row="3" Grid.Column="2"
                 Content="_Remove&#x0d;&#x0a;Selected"
                 Command="{Binding Path=RemoveSelectedCommand}"
                 VerticalAlignment="Center"/>
 
-        <Label Grid.Row="3" Grid.Column="0" Content="Output"/>
-        <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True"
+        <Label Grid.Row="4" Grid.Column="0" Content="Output"/>
+        <TextBox Grid.Row="4" Grid.Column="1" IsReadOnly="True"
                  Text="{Binding Path=OutputFolderName, Mode=OneWay}"/>
-        <Button Grid.Row="3" Grid.Column="2" Content="_Save To..."
+        <Button Grid.Row="4" Grid.Column="2" Content="_Save To..."
                 Command="{Binding Path=BrowseOutputFolderCommand}"/>
-
-        <metro:ToggleSwitch Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
-                            Content="Attempt to Skip Sponsor Advertisements"
-                            IsOn="{Binding Path=DoesSkipSponsor}">
-            <metro:ToggleSwitch.Style>
-                <Style TargetType="metro:ToggleSwitch" BasedOn="{StaticResource {x:Type metro:ToggleSwitch}}">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=Formats}" Value="{x:Null}">
-                            <Setter Property="IsEnabled" Value="False"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=Formats.Count}" Value="0">
-                            <Setter Property="IsEnabled" Value="False"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </metro:ToggleSwitch.Style>
-        </metro:ToggleSwitch>
 
         <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" SharedSizeGroup="Buttons"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" VerticalAlignment="Center"

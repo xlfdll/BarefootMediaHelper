@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 
 using WinForms = System.Windows.Forms;
 
@@ -12,7 +13,6 @@ using MahApps.Metro.Controls.Dialogs;
 using Xlfdll.Windows.Presentation;
 
 using BarefootMediaHelper.Helpers;
-using System.Windows.Input;
 
 namespace BarefootMediaHelper
 {
@@ -26,6 +26,7 @@ namespace BarefootMediaHelper
             this.DownloadRequestCards = new ObservableCollection<dynamic>();
 
             this.OutputFolderName = App.Settings.DownloadOutputFolderPath;
+            this.NoPlaylist = true;
         }
 
         public MainViewModel MainViewModel { get; }
@@ -38,7 +39,8 @@ namespace BarefootMediaHelper
         private Int32 _selectedFormatIndex;
         private Int32 _selectedDownloadRequestIndex;
         private String _outputFolderName;
-        private Boolean _doesSkipSponsor;
+        private Boolean _skipSponsor;
+        private Boolean _noPlaylist;
         private String _urlErrorCode;
 
         public String SourceURL
@@ -85,10 +87,15 @@ namespace BarefootMediaHelper
             get => _outputFolderName;
             set => SetField(ref _outputFolderName, value);
         }
-        public Boolean DoesSkipSponsor
+        public Boolean SkipSponsor
         {
-            get => _doesSkipSponsor;
-            set => SetField(ref _doesSkipSponsor, value);
+            get => _skipSponsor;
+            set => SetField(ref _skipSponsor, value);
+        }
+        public Boolean NoPlaylist
+        {
+            get => _noPlaylist;
+            set => SetField(ref _noPlaylist, value);
         }
         public String URLErrorCode
         {
@@ -136,7 +143,7 @@ namespace BarefootMediaHelper
                     this.MainViewModel.IsBusy = true;
 
                     MediaDownloadRequest request = new MediaDownloadRequest
-                            (this.SourceURL, this.SelectedFormatIndex, this.DoesSkipSponsor);
+                            (this.SourceURL, this.SelectedFormatIndex, this.SkipSponsor, this.NoPlaylist);
 
                     dynamic requestCard = new ExpandoObject();
 
