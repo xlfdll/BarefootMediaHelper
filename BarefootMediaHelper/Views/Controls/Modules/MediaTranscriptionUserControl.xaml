@@ -13,6 +13,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -38,18 +39,22 @@
         <Label Grid.Row="2" Grid.Column="0" Content="Mo_del"/>
         <ComboBox Grid.Row="2" Grid.Column="1" SelectedIndex="{Binding Path=SelectedModelIndex}">
             <ComboBoxItem Content="Default"/>
-            <ComboBoxItem Content="Tiny (English)"/>
-            <ComboBoxItem Content="Tiny (Multilingual)"/>
-            <ComboBoxItem Content="Base (English)"/>
-            <ComboBoxItem Content="Base (Multilingual)"/>
-            <ComboBoxItem Content="Small (English)"/>
-            <ComboBoxItem Content="Small (Multilingual)"/>
-            <ComboBoxItem Content="Medium (English)"/>
-            <ComboBoxItem Content="Medium (Multilingual)"/>
+            <ComboBoxItem Content="Tiny"/>
+            <ComboBoxItem Content="Base"/>
+            <ComboBoxItem Content="Small"/>
+            <ComboBoxItem Content="Medium"/>
             <ComboBoxItem Content="Large"/>
         </ComboBox>
 
-        <Button Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Right"
+        <Label Grid.Row="3" Grid.Column="0" Content="_Language"/>
+        <ComboBox Grid.Row="3" Grid.Column="1" SelectedIndex="{Binding Path=SelectedLanguageIndex}">
+            <ComboBoxItem Content="English"/>
+            <ComboBoxItem Content="Japanese"/>
+            <ComboBoxItem Content="Chinese"/>
+        </ComboBox>
+
+        <Button Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                HorizontalAlignment="Right"
                 Content="_Start Transcription"
                 Command="{Binding Path=StartCommand}"/>
     </Grid>

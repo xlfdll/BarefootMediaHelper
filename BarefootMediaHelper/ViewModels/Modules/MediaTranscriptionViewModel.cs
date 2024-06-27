@@ -18,6 +18,7 @@ namespace BarefootMediaHelper
             this.MainViewModel = mainViewModel;
 
             this.SelectedModelIndex = 0;
+            this.SelectedLanguageIndex = 0;
         }
 
         public MainViewModel MainViewModel { get; }
@@ -25,6 +26,7 @@ namespace BarefootMediaHelper
         private String _sourceFileName;
         private String _outputFileName;
         private Int32 _selectedModelIndex;
+        private Int32 _selectedLanguageIndex;
 
         public String SourceFileName
         {
@@ -54,6 +56,12 @@ namespace BarefootMediaHelper
         {
             get => _selectedModelIndex;
             set => SetField(ref _selectedModelIndex, value);
+        }
+
+        public Int32 SelectedLanguageIndex
+        {
+            get => _selectedLanguageIndex;
+            set => SetField(ref _selectedLanguageIndex, value);
         }
 
         public RelayCommand<Object> BrowseSourceFileCommand
@@ -120,6 +128,7 @@ namespace BarefootMediaHelper
                         await MediaTranscriptionHelper.ExecuteMediaTranscription
                             (this.SourceFileName,
                             this.OutputFileName,
+                            this.SelectedLanguageIndex,
                             this.SelectedModelIndex);
 
                         await controller.CloseAsync();
