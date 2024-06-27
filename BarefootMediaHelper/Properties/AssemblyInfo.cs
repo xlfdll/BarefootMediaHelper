@@ -12,7 +12,7 @@ using Xlfdll;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Xlfdll Workstation")]
 [assembly: AssemblyProduct("Barefoot Media Helper")]
-[assembly: AssemblyCopyright("© 2018-2023 Xlfdll Workstation")]
+[assembly: AssemblyCopyright("© 2018-2024 Xlfdll Workstation")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -51,6 +51,6 @@ using Xlfdll;
 // すべての値を指定するか、次を使用してビルド番号とリビジョン番号を既定に設定できます
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.7." + BuildInfo.Build)]
+[assembly: AssemblyVersion("0.8." + BuildInfo.Build)]
 
 [assembly: Guid("64a30efc-05c3-4885-98f1-5f338303b375")]

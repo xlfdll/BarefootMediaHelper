@@ -8,6 +8,7 @@ namespace BarefootMediaHelper
     {
         public static String ToolsPath
             => Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Tools");
+
         public static String FFMPEGPath
             => Path.Combine(ToolPaths.ToolsPath, "ffmpeg.exe");
         public static String FFProbePath
@@ -18,8 +19,7 @@ namespace BarefootMediaHelper
             => Path.Combine(ToolPaths.ToolsPath, "mp4box.exe");
         public static String YTDLPPath
             => Path.Combine(ToolPaths.ToolsPath, "yt-dlp.exe");
-
-        public static String BarefootTranscriberPath
-            => Path.Combine(ToolPaths.ToolsPath, @"xlfdll\BarefootMediaTranscriber.exe");
+        public static String WhisperCLIPath
+            => Path.Combine(ToolPaths.ToolsPath, "whisper.exe");
     }
 }
