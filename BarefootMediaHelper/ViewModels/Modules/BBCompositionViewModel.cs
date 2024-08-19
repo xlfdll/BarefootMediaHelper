@@ -23,7 +23,8 @@ namespace BarefootMediaHelper
         private String _sourceVideoFileName;
         private String _sourceSubtitleFileName;
         private String _outputFileName;
-        private Boolean _isHD60FPS;
+        private Boolean _is60FPS;
+        private Boolean _useOpenCL;
 
         public String SourceVideoFileName
         {
@@ -50,17 +51,20 @@ namespace BarefootMediaHelper
             get => _sourceSubtitleFileName;
             set => SetField(ref _sourceSubtitleFileName, value);
         }
-
         public String OutputFileName
         {
             get => _outputFileName;
             private set => SetField(ref _outputFileName, value);
         }
-
-        public Boolean IsHD60FPS
+        public Boolean Is60FPS
         {
-            get => _isHD60FPS;
-            set => SetField(ref _isHD60FPS, value);
+            get => _is60FPS;
+            set => SetField(ref _is60FPS, value);
+        }
+        public Boolean UseOpenCL
+        {
+            get => _useOpenCL;
+            set => SetField(ref _useOpenCL, value);
         }
 
         public RelayCommand<Object> BrowseSourceVideoFileCommand
@@ -112,7 +116,7 @@ namespace BarefootMediaHelper
                 {
                     SaveFileDialog dialog = new SaveFileDialog()
                     {
-                        Filter = "MPEG-4 Part 14 (*.mp4)|*.mp4|Flash Video (*.flv)|*.flv|All Files (*.*)|*.*",
+                        Filter = "MPEG-4 Part 14 (*.mp4)|*.mp4|All Files (*.*)|*.*",
                         InitialDirectory = String.IsNullOrEmpty(this.OutputFileName)
                             ? Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
                             : String.Empty,
@@ -154,7 +158,8 @@ namespace BarefootMediaHelper
                             (this.SourceVideoFileName,
                             this.SourceSubtitleFileName,
                             this.OutputFileName,
-                            this.IsHD60FPS);
+                            this.Is60FPS,
+                            this.UseOpenCL);
 
                         await controller.CloseAsync();
 
