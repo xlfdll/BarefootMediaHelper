@@ -43,9 +43,13 @@
         <Button Grid.Row="2" Grid.Column="2" Content="Save _To..."
                 Command="{Binding Path=BrowseOutputFileCommand}"/>
 
-        <Label Grid.Row="3" Grid.Column="0" Content="_Mode"/>
-        <metro:ToggleSwitch Grid.Row="3" Grid.Column="1" Content="Source video is 60fps"
-                            IsOn="{Binding Path=IsHD60FPS}"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Options"/>
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+            <metro:ToggleSwitch Content="60fps Source"
+                                IsOn="{Binding Path=Is60FPS}"/>
+            <metro:ToggleSwitch Content="Use Hardware Acceleration"
+                                IsOn="{Binding Path=UseOpenCL}"/>
+        </StackPanel>
 
         <Button Grid.Row="3" Grid.Column="2" Content="Start _Convert" IsDefault="True"
                 Command="{Binding Path=StartCommand}"/>
