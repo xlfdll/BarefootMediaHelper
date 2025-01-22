@@ -19,12 +19,12 @@ Made for [Barefoot Invader (素足星侵略者)](https://space.bilibili.com/2592
 ## System Requirements
 * .NET Framework 4.8
 
-[Runtime configuration](https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-configure-an-app-to-support-net-framework-4-or-4-5) is needed for running on other versions of .NET Framework.
+[Runtime configuration](https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-configure-an-app-to-support-net-framework-4-or-4-5) may be needed for running on other versions of .NET Framework.
 
 ## Development Prerequisites
 * Visual Studio 2017+
 
-Before the build, generate-build-number.sh needs to be executed in a Git / Bash shell to generate build information code file (BuildInfo.cs).
+Before the build, generate-build-number.sh needs to be executed in a Git / Bash shell to generate build information code file (`BuildInfo.cs`).
 
 ## External Sources
 User interface is based on [MahApps.Metro](https://github.com/MahApps/MahApps.Metro) library, which is licensed under [MIT](https://github.com/MahApps/MahApps.Metro/blob/develop/LICENSE) license.
