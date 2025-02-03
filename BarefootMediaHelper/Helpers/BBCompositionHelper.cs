@@ -19,7 +19,7 @@ namespace BarefootMediaHelper
         {
             String outputDirectory = Path.GetDirectoryName(outputFileName);
             String outputFileExtension = Path.GetExtension(outputFileName);
-            String commonParameters = $"-vcodec libx264 -preset ultrafast -profile:v high -level:v 4.1 -pix_fmt yuv420p -b:v 2000k -acodec aac -strict -2 -ac 2 -ab 192k -ar 44100 -f {outputFileExtension.Remove(0, 1)} -y ";
+            String commonParameters = $"-vcodec libx264 -preset slower -profile:v high -pix_fmt yuv420p -crf 12 -acodec aac -ac 2 -ab 320k -ar 48000 -movflags +faststart -f {outputFileExtension.Remove(0, 1)} -y ";
 
             if (is60FPS)
             {
@@ -28,7 +28,7 @@ namespace BarefootMediaHelper
 
             StringBuilder sb = new StringBuilder();
 
-            sb.Append($"{(useOpenCL ? "-hwaccel auto" : String.Empty)} -i \"{sourceVideoFileName}\" {(useOpenCL ? "-x264opts opencl" : String.Empty)} ");
+            sb.Append($"{(useOpenCL ? "-hwaccel auto" : String.Empty)} -i \"{sourceVideoFileName}\" {(useOpenCL ? "-x264-params opencl=true" : String.Empty)} ");
 
             if (!String.IsNullOrEmpty(sourceSubtitleFileName))
             {
