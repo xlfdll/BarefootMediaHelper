@@ -1,0 +1,131 @@
+﻿<UserControl x:Class="BarefootMediaHelper.EndingSwapUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:ctlzex="urn:controlzex"
+             xmlns:local="clr-namespace:BarefootMediaHelper"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="_Source Video"/>
+        <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0" IsReadOnly="True"
+                     Text="{Binding Path=SourceVideoFileName, Mode=OneWay}"
+                     PreviewDragOver="SourceVideoFileNameTextBox_PreviewDragOver"
+                     Drop="SourceVideoFileNameTextBox_Drop"
+                     metro:TextBoxHelper.Watermark="Drag and drop, or browse a source video file here"/>
+            <Button Grid.Column="1" Content="_Browse..."
+                    Command="{Binding Path=BrowseSourceVideoFileCommand}"/>
+        </Grid>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Ending _Logo"/>
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Content="Position"/>
+            <TextBox Grid.Column="1" Text="{Binding Path=EndingLogoPosition}">
+                <i:Interaction.Behaviors>
+                    <ctlzex:TextBoxInputMaskBehavior InputMask="0:00:00"/>
+                </i:Interaction.Behaviors>
+            </TextBox>
+
+            <Label Grid.Column="2" Content="Length"/>
+            <TextBox Grid.Column="3" Text="{Binding Path=EndingLogoLength}">
+                <i:Interaction.Behaviors>
+                    <ctlzex:TextBoxInputMaskBehavior InputMask="0:00:00"/>
+                </i:Interaction.Behaviors>
+            </TextBox>
+        </Grid>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Ending _Cut"/>
+        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Content="Position"/>
+            <TextBox Grid.Column="1" Text="{Binding Path=EndingCutStartPosition}">
+                <i:Interaction.Behaviors>
+                    <ctlzex:TextBoxInputMaskBehavior InputMask="0:00:00"/>
+                </i:Interaction.Behaviors>
+            </TextBox>
+
+            <Label Grid.Column="2" Content="Length"/>
+            <TextBox Grid.Column="3" Text="{Binding Path=EndingCutLength}">
+                <i:Interaction.Behaviors>
+                    <ctlzex:TextBoxInputMaskBehavior InputMask="0:00:00"/>
+                </i:Interaction.Behaviors>
+            </TextBox>
+        </Grid>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="New Ending Clip"/>
+        <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0" IsReadOnly="True"
+                     Text="{Binding Path=NewEndingClipVideoFileName, Mode=OneWay}"
+                     PreviewDragOver="SourceVideoFileNameTextBox_PreviewDragOver"
+                     Drop="NewEndingClipVideoFileName_Drop"
+                     metro:TextBoxHelper.Watermark="Drag and drop, or browse an ending clip video file here"/>
+            <Button Grid.Column="1" Content="_Browse..."
+                    Command="{Binding Path=BrowseNewEndingClipFileCommand}"/>
+        </Grid>
+
+        <Label Grid.Row="4" Grid.Column="0" Content="_Logo Swap / Insert Position"/>
+        <ComboBox Grid.Row="4" Grid.Column="1" SelectedIndex="{Binding Path=SelectedLogoSwapPositionIndex}">
+            <ComboBoxItem Content="Front"/>
+            <ComboBoxItem Content="Back"/>
+        </ComboBox>
+
+        <Label Grid.Row="5" Grid.Column="0" Content="Output"/>
+        <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Column="0" IsReadOnly="True"
+                     Text="{Binding Path=OutputVideoFileName, Mode=OneWay}"/>
+            <Button Grid.Column="1" Content="Save _To..."
+                    Command="{Binding Path=BrowseOutputVideoFileCommand}"/>
+        </Grid>
+
+        <Button Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right"
+                Content="Start _Processing"/>
+    </Grid>
+</UserControl>

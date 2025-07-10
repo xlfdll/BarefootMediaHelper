@@ -13,7 +13,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -23,30 +22,27 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
-                   Text="Audio Extraction" Style="{StaticResource TitleTextBlock}"/>
-
-        <Label Grid.Row="1" Grid.Column="0" Content="_Source"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" IsReadOnly="True"
+        <Label Grid.Row="0" Grid.Column="0" Content="_Source"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" IsReadOnly="True"
                  Text="{Binding Path=SourceFileName, Mode=OneWay}"
                  metro:TextBoxHelper.Watermark="Drag and drop, or browse a source video file here"
                  AllowDrop="True" PreviewDragOver="SourceFileNameTextBox_PreviewDragOver" Drop="SourceFileNameTextBox_Drop"/>
-        <Button Grid.Row="1" Grid.Column="4" Content="_Browse..."
+        <Button Grid.Row="0" Grid.Column="4" Content="_Browse..."
                 Command="{Binding Path=BrowseSourceFileCommand}"/>
 
-        <Label Grid.Row="2" Grid.Column="0" Content="_Format"/>
-        <ComboBox Grid.Row="2" Grid.Column="1"
+        <Label Grid.Row="1" Grid.Column="0" Content="_Format"/>
+        <ComboBox Grid.Row="1" Grid.Column="1"
                   SelectedIndex="{Binding Path=SelectedFormatIndex}">
             <ComboBoxItem Content="Wave (PCM)"/>
         </ComboBox>
 
-        <Label Grid.Row="2" Grid.Column="2" Content="_Output"/>
-        <TextBox Grid.Row="2" Grid.Column="3" IsReadOnly="True"
+        <Label Grid.Row="1" Grid.Column="2" Content="_Output"/>
+        <TextBox Grid.Row="1" Grid.Column="3" IsReadOnly="True"
                  Text="{Binding Path=OutputFolderName, Mode=OneWay}"/>
-        <Button Grid.Row="2" Grid.Column="4" Content="Save _To..."
+        <Button Grid.Row="1" Grid.Column="4" Content="Save _To..."
                 Command="{Binding Path=BrowseOutputFolderCommand}"/>
 
-        <Button Grid.Row="3" Grid.Column="4" Content="Start _Extraction" IsDefault="True"
+        <Button Grid.Row="2" Grid.Column="4" Content="Start _Extraction" IsDefault="True"
                 Command="{Binding Path=StartCommand}"/>
     </Grid>
 </UserControl>

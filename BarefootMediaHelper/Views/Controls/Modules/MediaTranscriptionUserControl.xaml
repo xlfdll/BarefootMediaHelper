@@ -22,25 +22,22 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"
-                   Text="Media Transcription" Style="{StaticResource TitleTextBlock}"/>
-
-        <Label Grid.Row="1" Grid.Column="0" Content="Source _Media"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" IsReadOnly="True"
+        <Label Grid.Row="0" Grid.Column="0" Content="Source _Media"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" IsReadOnly="True"
                  Text="{Binding Path=SourceFileName, Mode=OneWay}"
                  metro:TextBoxHelper.Watermark="Drag and drop, or browse a source media file here"
                  AllowDrop="True" PreviewDragOver="SourceFileNameTextBox_PreviewDragOver" Drop="SourceMediaFileNameTextBox_Drop"/>
-        <Button Grid.Row="1" Grid.Column="3" Content="_Browse..."
+        <Button Grid.Row="0" Grid.Column="3" Content="_Browse..."
                 Command="{Binding Path=BrowseSourceFileCommand}"/>
 
-        <Label Grid.Row="2" Grid.Column="0" Content="_Output Subtitle"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" IsReadOnly="True"
+        <Label Grid.Row="1" Grid.Column="0" Content="_Output Subtitle"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" IsReadOnly="True"
                  Text="{Binding Path=OutputFileName, Mode=OneWay}"/>
-        <Button Grid.Row="2" Grid.Column="3" Content="Save _To..."
+        <Button Grid.Row="1" Grid.Column="3" Content="Save _To..."
                 Command="{Binding Path=BrowseOutputFileCommand}"/>
 
-        <Label Grid.Row="3" Grid.Column="0" Content="Mo_del"/>
-        <ComboBox Grid.Row="3" Grid.Column="1" SelectedIndex="{Binding Path=SelectedModelIndex}">
+        <Label Grid.Row="2" Grid.Column="0" Content="Mo_del"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" SelectedIndex="{Binding Path=SelectedModelIndex}">
             <ComboBoxItem Content="Default"/>
             <ComboBoxItem Content="Tiny"/>
             <ComboBoxItem Content="Base"/>
@@ -49,14 +46,14 @@
             <ComboBoxItem Content="Large"/>
         </ComboBox>
 
-        <Label Grid.Row="4" Grid.Column="0" Content="_Language"/>
-        <ComboBox Grid.Row="4" Grid.Column="1" SelectedIndex="{Binding Path=SelectedLanguageIndex}">
+        <Label Grid.Row="3" Grid.Column="0" Content="_Language"/>
+        <ComboBox Grid.Row="3" Grid.Column="1" SelectedIndex="{Binding Path=SelectedLanguageIndex}">
             <ComboBoxItem Content="English"/>
             <ComboBoxItem Content="Japanese"/>
             <ComboBoxItem Content="Chinese"/>
         </ComboBox>
 
-        <Button Grid.Row="3" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2"
+        <Button Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2"
                 HorizontalAlignment="Right"
                 Content="_Start Transcription"
                 Command="{Binding Path=StartCommand}"/>

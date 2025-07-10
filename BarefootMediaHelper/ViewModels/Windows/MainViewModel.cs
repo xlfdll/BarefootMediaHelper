@@ -32,6 +32,8 @@ namespace BarefootMediaHelper
             => new FormatConversionViewModel(this);
         public AudioExtractionViewModel AudioExtractionViewModel
             => new AudioExtractionViewModel(this);
+        public EndingSwapViewModel EndingSwapViewModel
+            => new EndingSwapViewModel(this);
         public LogViewModel LogViewModel
             => new LogViewModel(this);
 
