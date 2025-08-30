@@ -126,6 +126,7 @@
         </Grid>
 
         <Button Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right"
-                Content="Start _Processing"/>
+                Content="Start _Processing"
+                Command="{Binding Path=StartCommand}"/>
     </Grid>
 </UserControl>

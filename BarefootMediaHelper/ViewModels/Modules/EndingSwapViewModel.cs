@@ -1,5 +1,9 @@
 ﻿using System;
 
+using Microsoft.Win32;
+
+using Xlfdll.Windows.Presentation;
+
 namespace BarefootMediaHelper
 {
     public class EndingSwapViewModel : ViewModelBase
@@ -17,6 +21,7 @@ namespace BarefootMediaHelper
 
         private String _sourceVideoFileName;
         private String _newEndingClipVideoFileName;
+        private String _outputVideoFileName;
         private TimeSpan _endingLogoPosition;
         private TimeSpan _endingLogoLength;
         private TimeSpan _endingCutStartPosition;
@@ -32,6 +37,11 @@ namespace BarefootMediaHelper
         {
             get => _newEndingClipVideoFileName;
             set => SetField(ref _newEndingClipVideoFileName, value);
+        }
+        public String OutputVideoFileName
+        {
+            get => _outputVideoFileName;
+            set => SetField(ref _outputVideoFileName, value);
         }
         public String EndingLogoPosition
         {
@@ -63,6 +73,81 @@ namespace BarefootMediaHelper
         public TimeSpan EndingLogoLengthTimeSpan => _endingLogoLength;
         public TimeSpan EndingCutStartPositionTimeSpan => _endingCutStartPosition;
         public TimeSpan EndingCutLengthTimeSpan => _endingCutLength;
+
+        public RelayCommand<Object> BrowseSourceVideoFileCommand
+            => new RelayCommand<Object>
+            (
+                delegate
+                {
+                    OpenFileDialog dialog = new OpenFileDialog()
+                    {
+                        Filter = "Supported Formats (*.mp4;*.flv;*.mkv;*.avi)|*.mp4;*.flv;*.mkv;*.avi|All Files (*.*)|*.*",
+                        InitialDirectory = String.IsNullOrEmpty(this.SourceVideoFileName)
+                            ? Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+                            : String.Empty,
+                        FileName = this.SourceVideoFileName
+                    };
+
+                    if (dialog.ShowDialog() == true)
+                    {
+                        this.SourceVideoFileName = dialog.FileName;
+                    }
+                }
+            );
+        public RelayCommand<Object> BrowseNewEndingClipFileCommand
+            => new RelayCommand<Object>
+            (
+                delegate
+                {
+                    OpenFileDialog dialog = new OpenFileDialog()
+                    {
+                        Filter = "Supported Formats (*.mp4;*.flv;*.mkv;*.avi)|*.mp4;*.flv;*.mkv;*.avi|All Files (*.*)|*.*",
+                        InitialDirectory = String.IsNullOrEmpty(this.NewEndingClipVideoFileName)
+                            ? Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+                            : String.Empty,
+                        FileName = this.NewEndingClipVideoFileName
+                    };
+
+                    if (dialog.ShowDialog() == true)
+                    {
+                        this.NewEndingClipVideoFileName = dialog.FileName;
+                    }
+                }
+            );
+        public RelayCommand<Object> BrowseOutputVideoFileCommand
+            => new RelayCommand<Object>
+            (
+                delegate
+                {
+                    SaveFileDialog dialog = new SaveFileDialog()
+                    {
+                        Filter = "Supported Formats (*.mp4;*.flv;*.mkv;*.avi)|*.mp4;*.flv;*.mkv;*.avi|All Files (*.*)|*.*",
+                        InitialDirectory = String.IsNullOrEmpty(this.OutputVideoFileName)
+                            ? Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+                            : String.Empty,
+                        FileName = this.OutputVideoFileName
+                    };
+
+                    if (dialog.ShowDialog() == true)
+                    {
+                        this.OutputVideoFileName = dialog.FileName;
+                    }
+                }
+            );
+        public RelayCommand<Object> StartCommand
+            => new RelayCommand<Object>
+            (
+                delegate
+                {
+
+                },
+                delegate
+                {
+                    return !String.IsNullOrEmpty(this.SourceVideoFileName)
+                        && !String.IsNullOrEmpty(this.NewEndingClipVideoFileName)
+                        && !String.IsNullOrEmpty(this.OutputVideoFileName);
+                }
+            );
 
         private const String TimeSpanFormat = @"h\:mm\:ss";
     }
