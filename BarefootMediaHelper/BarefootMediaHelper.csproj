@@ -78,7 +78,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\Controls\Modules\EndingSwapUserControl.xaml">
+    <Page Include="Views\Controls\Modules\NCAdjustmentsUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -136,6 +136,9 @@
     <Compile Include="..\XDLibrary\Xlfdll.Windows.Presentation\ApplicationPackUri.cs">
       <Link>Base\Windows\Presentation\ApplicationPackUri.cs</Link>
     </Compile>
+    <Compile Include="..\XDLibrary\Xlfdll.Windows.Presentation\Converters\BooleanToSingleValueEnumConverter.cs">
+      <Link>Base\Windows\Presentation\Converters\BooleanToSingleValueEnumConverter.cs</Link>
+    </Compile>
     <Compile Include="..\XDLibrary\Xlfdll.Windows.Presentation\RelayCommand.cs">
       <Link>Base\Windows\Presentation\RelayCommand.cs</Link>
     </Compile>
@@ -145,12 +148,13 @@
     <Compile Include="..\XDLibrary\Xlfdll.Windows\Environment\SpecialFolders.cs">
       <Link>Base\Windows\Shell\SpecialFolders.cs</Link>
     </Compile>
+    <Compile Include="Types.cs" />
     <Compile Include="Helpers\AudioExtractionHelper.cs" />
     <Compile Include="Helpers\MediaTranscriptionHelper.cs" />
-    <Compile Include="ViewModels\Modules\EndingSwapViewModel.cs" />
+    <Compile Include="ViewModels\Modules\NCAdjustmentViewModel.cs" />
     <Compile Include="ViewModels\Modules\MediaTranscriptionViewModel.cs" />
-    <Compile Include="Views\Controls\Modules\EndingSwapUserControl.xaml.cs">
-      <DependentUpon>EndingSwapUserControl.xaml</DependentUpon>
+    <Compile Include="Views\Controls\Modules\NCAdjustmentsUserControl.xaml.cs">
+      <DependentUpon>NCAdjustmentsUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\Modules\MediaTranscriptionUserControl.xaml.cs">
       <DependentUpon>MediaTranscriptionUserControl.xaml</DependentUpon>

@@ -107,8 +107,8 @@
         <TabItem Header="Audio Extraction">
             <local:AudioExtractionUserControl DataContext="{Binding Path=AudioExtractionViewModel}"/>
         </TabItem>
-        <TabItem Header="Ending Swap">
-            <local:EndingSwapUserControl DataContext="{Binding Path=EndingSwapViewModel}"/>
+        <TabItem Header="NC Adjustments">
+            <local:NCAdjustmentsUserControl DataContext="{Binding Path=NCAdjustmentsViewModel}"/>
         </TabItem>
     </TabControl>
 </metro:MetroWindow>

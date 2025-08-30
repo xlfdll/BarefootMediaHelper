@@ -7,16 +7,16 @@ using System.IO;
 namespace BarefootMediaHelper
 {
     /// <summary>
-    /// EndingSwapUserControl.xaml の相互作用ロジック
+    /// NCAdjustmentsUserControl.xaml の相互作用ロジック
     /// </summary>
-    public partial class EndingSwapUserControl : UserControl
+    public partial class NCAdjustmentsUserControl : UserControl
     {
-        public EndingSwapUserControl()
+        public NCAdjustmentsUserControl()
         {
             InitializeComponent();
         }
 
-        private void SourceVideoFileNameTextBox_PreviewDragOver(object sender, DragEventArgs e)
+        private void FileNameTextBox_PreviewDragOver(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -32,7 +32,7 @@ namespace BarefootMediaHelper
 
             if (files != null && supportedExtensions.Contains(Path.GetExtension(files[0]).ToLowerInvariant()))
             {
-                EndingSwapViewModel viewModel = this.DataContext as EndingSwapViewModel;
+                NCAdjustmentsViewModel viewModel = this.DataContext as NCAdjustmentsViewModel;
 
                 if (viewModel != null)
                 {
@@ -41,18 +41,18 @@ namespace BarefootMediaHelper
             }
         }
 
-        private void NewEndingClipVideoFileName_Drop(object sender, DragEventArgs e)
+        private void NewClipVideoFileName_Drop(object sender, DragEventArgs e)
         {
             String[] files = e.Data.GetData(DataFormats.FileDrop) as String[];
             String[] supportedExtensions = new String[] { ".mp4", ".flv", ".mkv", ".avi" };
 
             if (files != null && supportedExtensions.Contains(Path.GetExtension(files[0]).ToLowerInvariant()))
             {
-                EndingSwapViewModel viewModel = this.DataContext as EndingSwapViewModel;
+                NCAdjustmentsViewModel viewModel = this.DataContext as NCAdjustmentsViewModel;
 
                 if (viewModel != null)
                 {
-                    viewModel.NewEndingClipVideoFileName = files[0];
+                    viewModel.NewClipVideoFileName = files[0];
                 }
             }
         }

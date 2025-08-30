@@ -1,0 +1,162 @@
+﻿<UserControl x:Class="BarefootMediaHelper.NCAdjustmentsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:ctlzex="urn:controlzex"
+             xmlns:local="clr-namespace:BarefootMediaHelper"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="_Source Video"/>
+        <TextBox Grid.Row="0" Grid.Column="1" IsReadOnly="True"
+                 Text="{Binding Path=SourceVideoFileName, Mode=OneWay}"
+                 PreviewDragOver="FileNameTextBox_PreviewDragOver"
+                 Drop="SourceVideoFileNameTextBox_Drop"
+                 metro:TextBoxHelper.Watermark="Drag and drop, or browse a source video file here"/>
+        <Button Grid.Row="0" Grid.Column="2" Content="_Browse..."
+                Command="{Binding Path=BrowseSourceVideoFileCommand}"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Adjustments"/>
+        <ListBox Grid.Row="1" Grid.Column="1" Height="100"
+                 ItemsSource="{Binding Path=Adjustments}"
+                 SelectedIndex="{Binding Path=SelectedAdjustmentIndex}"/>
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Content="R_emove Selected" />
+            <Button Grid.Row="1" Content="_Clear All"/>
+        </Grid>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Type"/>
+        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.Resources>
+                <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
+                    <Setter Property="FontSize" Value="16"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <RadioButton Grid.Column="0" Content="_Insert Clip"
+                         IsChecked="{Binding Path=AdjustmentType,
+                                             Converter={StaticResource BooleanToSingleValueEnumConverter},
+                                             ConverterParameter=InsertClip}"/>
+            <RadioButton Grid.Column="1" Content="_Remove Range"
+                         IsChecked="{Binding Path=AdjustmentType,
+                                             Converter={StaticResource BooleanToSingleValueEnumConverter},
+                                             ConverterParameter=RemoveRange}"/>
+        </Grid>
+
+        <GroupBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=AdjustmentType}" Value="InsertClip">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+                    </Grid.Style>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="New Clip"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" IsReadOnly="True"
+                         Text="{Binding Path=NewClipVideoFileName, Mode=OneWay}"
+                         PreviewDragOver="FileNameTextBox_PreviewDragOver"
+                         Drop="NewClipVideoFileName_Drop"
+                         metro:TextBoxHelper.Watermark="Drag and drop, or browse an clip video file here to insert"/>
+                    <Button Grid.Row="0" Grid.Column="2" Content="_Browse..."
+                            Command="{Binding Path=BrowseNewClipFileCommand}"/>
+
+                    <Label Grid.Row="1" Grid.Column="0" Content="Position"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=StartPosition}"
+                             HorizontalAlignment="Left" MaxWidth="80">
+                        <i:Interaction.Behaviors>
+                            <ctlzex:TextBoxInputMaskBehavior InputMask="0:00:00"/>
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </Grid>
+                <Grid Grid.Row="0">
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=AdjustmentType}" Value="RemoveRange">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+                    </Grid.Style>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" Content="Start Position"/>
+                    <TextBox Grid.Column="1" Text="{Binding Path=StartPosition}">
+                        <i:Interaction.Behaviors>
+                            <ctlzex:TextBoxInputMaskBehavior InputMask="0:00:00"/>
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+
+                    <Label Grid.Column="2" Content="Length"/>
+                    <TextBox Grid.Column="3" Text="{Binding Path=Length}">
+                        <i:Interaction.Behaviors>
+                            <ctlzex:TextBoxInputMaskBehavior InputMask="0:00:00"/>
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                </Grid>
+
+                <Button Grid.Row="1" HorizontalAlignment="Right"
+                        Content="_Add Adjustment"
+                        Command="{Binding Path=AddAdjustmentCommand}"/>
+            </Grid>
+        </GroupBox>
+
+        <Button Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right"
+                Content="Start _Processing"
+                Command="{Binding Path=StartCommand}"/>
+    </Grid>
+</UserControl>

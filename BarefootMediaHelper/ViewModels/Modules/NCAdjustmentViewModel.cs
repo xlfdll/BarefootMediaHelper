@@ -6,73 +6,42 @@ using Xlfdll.Windows.Presentation;
 
 namespace BarefootMediaHelper
 {
-    public class EndingSwapViewModel : ViewModelBase
+    public class NCAdjustmentsViewModel : ViewModelBase
     {
-        public EndingSwapViewModel(MainViewModel mainViewModel)
+        public NCAdjustmentsViewModel(MainViewModel mainViewModel)
         {
             this.MainViewModel = mainViewModel;
 
-            this.SelectedLogoSwapPositionIndex = 0;
-
-            _endingLogoLength = TimeSpan.FromSeconds(6);
+            this.AdjustmentType = AdjustmentType.InsertClip;
         }
 
         public MainViewModel MainViewModel { get; }
 
         private String _sourceVideoFileName;
-        private String _newEndingClipVideoFileName;
+        private AdjustmentType _adjustmentType;
+        private String _newClipVideoFileName;
         private String _outputVideoFileName;
-        private TimeSpan _endingLogoPosition;
-        private TimeSpan _endingLogoLength;
-        private TimeSpan _endingCutStartPosition;
-        private TimeSpan _endingCutLength;
-        private Int32 _selectedLogoSwapPositionIndex;
 
         public String SourceVideoFileName
         {
             get => _sourceVideoFileName;
             set => SetField(ref _sourceVideoFileName, value);
         }
-        public String NewEndingClipVideoFileName
+        public AdjustmentType AdjustmentType
         {
-            get => _newEndingClipVideoFileName;
-            set => SetField(ref _newEndingClipVideoFileName, value);
+            get => _adjustmentType;
+            set => SetField(ref _adjustmentType, value);
+        }
+        public String NewClipVideoFileName
+        {
+            get => _newClipVideoFileName;
+            set => SetField(ref _newClipVideoFileName, value);
         }
         public String OutputVideoFileName
         {
             get => _outputVideoFileName;
             set => SetField(ref _outputVideoFileName, value);
         }
-        public String EndingLogoPosition
-        {
-            get => _endingLogoPosition.ToString(EndingSwapViewModel.TimeSpanFormat);
-            set => SetField(ref _endingLogoPosition, TimeSpan.Parse(value));
-        }
-        public String EndingLogoLength
-        {
-            get => _endingLogoLength.ToString(EndingSwapViewModel.TimeSpanFormat);
-            set => SetField(ref _endingLogoLength, TimeSpan.Parse(value));
-        }
-        public String EndingCutStartPosition
-        {
-            get => _endingCutStartPosition.ToString(EndingSwapViewModel.TimeSpanFormat);
-            set => SetField(ref _endingCutStartPosition, TimeSpan.Parse(value));
-        }
-        public String EndingCutLength
-        {
-            get => _endingCutLength.ToString(EndingSwapViewModel.TimeSpanFormat);
-            set => SetField(ref _endingCutLength, TimeSpan.Parse(value));
-        }
-        public Int32 SelectedLogoSwapPositionIndex
-        {
-            get => _selectedLogoSwapPositionIndex;
-            set => SetField(ref _selectedLogoSwapPositionIndex, value);
-        }
-
-        public TimeSpan EndingLogoPositionTimeSpan => _endingLogoPosition;
-        public TimeSpan EndingLogoLengthTimeSpan => _endingLogoLength;
-        public TimeSpan EndingCutStartPositionTimeSpan => _endingCutStartPosition;
-        public TimeSpan EndingCutLengthTimeSpan => _endingCutLength;
 
         public RelayCommand<Object> BrowseSourceVideoFileCommand
             => new RelayCommand<Object>
@@ -94,7 +63,7 @@ namespace BarefootMediaHelper
                     }
                 }
             );
-        public RelayCommand<Object> BrowseNewEndingClipFileCommand
+        public RelayCommand<Object> BrowseNewClipFileCommand
             => new RelayCommand<Object>
             (
                 delegate
@@ -102,15 +71,15 @@ namespace BarefootMediaHelper
                     OpenFileDialog dialog = new OpenFileDialog()
                     {
                         Filter = "Supported Formats (*.mp4;*.flv;*.mkv;*.avi)|*.mp4;*.flv;*.mkv;*.avi|All Files (*.*)|*.*",
-                        InitialDirectory = String.IsNullOrEmpty(this.NewEndingClipVideoFileName)
+                        InitialDirectory = String.IsNullOrEmpty(this.NewClipVideoFileName)
                             ? Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
                             : String.Empty,
-                        FileName = this.NewEndingClipVideoFileName
+                        FileName = this.NewClipVideoFileName
                     };
 
                     if (dialog.ShowDialog() == true)
                     {
-                        this.NewEndingClipVideoFileName = dialog.FileName;
+                        this.NewClipVideoFileName = dialog.FileName;
                     }
                 }
             );
@@ -144,7 +113,7 @@ namespace BarefootMediaHelper
                 delegate
                 {
                     return !String.IsNullOrEmpty(this.SourceVideoFileName)
-                        && !String.IsNullOrEmpty(this.NewEndingClipVideoFileName)
+                        && !String.IsNullOrEmpty(this.NewClipVideoFileName)
                         && !String.IsNullOrEmpty(this.OutputVideoFileName);
                 }
             );
