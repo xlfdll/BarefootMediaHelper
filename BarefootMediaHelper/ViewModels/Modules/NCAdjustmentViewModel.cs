@@ -53,15 +53,15 @@ namespace BarefootMediaHelper
             get => _selectedAdjustmentIndex;
             set => SetField(ref _selectedAdjustmentIndex, value);
         }
-        public String StartPosition
+        public TimeSpan StartPosition
         {
-            get => _startPosition.ToString(TimeSpanFormat);
-            set => SetField(ref _startPosition, TimeSpan.Parse(value));
+            get => _startPosition;
+            set => SetField(ref _startPosition, value);
         }
-        public String EndPosition
+        public TimeSpan EndPosition
         {
-            get => _endPosition.ToString(TimeSpanFormat);
-            set => SetField(ref _endPosition, TimeSpan.Parse(value));
+            get => _endPosition;
+            set => SetField(ref _endPosition, value);
         }
 
         public ObservableCollection<NCAdjustment> Adjustments { get; }
@@ -139,7 +139,7 @@ namespace BarefootMediaHelper
                                 NCInsertClipAdjustment adjustment = new NCInsertClipAdjustment
                                 (
                                     this.AdjustmentType,
-                                    TimeSpan.Parse(this.StartPosition),
+                                    this.StartPosition,
                                     this.NewClipVideoFileName
                                 );
 
@@ -152,8 +152,8 @@ namespace BarefootMediaHelper
                                 NCRemoveRangeAdjustment adjustment = new NCRemoveRangeAdjustment
                                 (
                                     this.AdjustmentType,
-                                    TimeSpan.Parse(this.StartPosition),
-                                    TimeSpan.Parse(this.EndPosition)
+                                    this.StartPosition,
+                                    this.EndPosition
                                 );
 
                                 this.Adjustments.Add(adjustment);
@@ -171,7 +171,7 @@ namespace BarefootMediaHelper
                         case NCAdjustmentType.InsertClip:
                             return !String.IsNullOrEmpty(this.NewClipVideoFileName);
                         case NCAdjustmentType.RemoveRange:
-                            return true;
+                            return this.EndPosition > this.StartPosition;
                         default:
                             return false;
                     }
