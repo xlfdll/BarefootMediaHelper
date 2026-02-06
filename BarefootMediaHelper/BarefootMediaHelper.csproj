@@ -148,7 +148,7 @@
     <Compile Include="..\XDLibrary\Xlfdll.Windows\Environment\SpecialFolders.cs">
       <Link>Base\Windows\Shell\SpecialFolders.cs</Link>
     </Compile>
-    <Compile Include="Types.cs" />
+    <Compile Include="Models\NCAdjustment.cs" />
     <Compile Include="Helpers\AudioExtractionHelper.cs" />
     <Compile Include="Helpers\MediaTranscriptionHelper.cs" />
     <Compile Include="ViewModels\Modules\NCAdjustmentViewModel.cs" />
