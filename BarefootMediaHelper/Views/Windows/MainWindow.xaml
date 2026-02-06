@@ -64,7 +64,31 @@
         </Style>
     </Window.Resources>
 
-    <TabControl TabStripPlacement="Top" metro:TabControlHelper.Underlined="TabPanel">
+    <TabControl TabStripPlacement="Right" metro:TabControlHelper.Underlined="TabPanel">
+        <TabControl.ContentTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="1"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="24"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Gray3}"/>
+                            <Setter Property="Margin" Value="5"/>
+                        </Style>
+                    </Grid.Resources>
+
+                    <TextBlock Grid.Row="0" Text="{Binding Path=Parent.Header}"/>
+                    <Rectangle Grid.Row="1" Fill="{DynamicResource MahApps.Brushes.Gray3}"/>
+                    <ContentPresenter Grid.Row="2" Content="{Binding}"/>
+                </Grid>
+            </DataTemplate>
+        </TabControl.ContentTemplate>
+        
         <TabItem Header="Media Download">
             <local:MediaDownloadUserControl DataContext="{Binding Path=MediaDownloadViewModel}"/>
         </TabItem>
@@ -82,6 +106,9 @@
         </TabItem>
         <TabItem Header="Audio Extraction">
             <local:AudioExtractionUserControl DataContext="{Binding Path=AudioExtractionViewModel}"/>
+        </TabItem>
+        <TabItem Header="NC Adjustments">
+            <local:NCAdjustmentsUserControl DataContext="{Binding Path=NCAdjustmentsViewModel}"/>
         </TabItem>
     </TabControl>
 </metro:MetroWindow>
